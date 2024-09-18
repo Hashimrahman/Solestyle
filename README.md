@@ -20,7 +20,7 @@ SoleStyle is an e-commerce platform built exclusively for selling shoes. This pr
 - **Frontend Framework**: React
 - **Bundler**: Vite
 - **Styling**: Tailwind CSS
-- **Data**: JSON (for product information)
+- **Data**: JSON (for product information and User Management)
 
 ## Getting Started
 
