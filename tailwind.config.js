@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        'custom-shadow': '0px 0px 20px 1px #cbd5e1', // Custom offset (5px x, 10px y)
+        'custom-shadow': '0px 0px 20px 1px #cbd5e1',
+        'custom-shadow-2' : '5px 5px 1px 0px #000000a5'
       },
 
       colors:{

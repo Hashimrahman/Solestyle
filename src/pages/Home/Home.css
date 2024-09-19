@@ -1,0 +1,21 @@
+/* Global styles or CSS module */
+.outlined-text {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .outlined-text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background: linear-gradient(black, black);
+    z-index: -1;
+    transform: translateY(1px);
+    white-space: nowrap;
+    background: #000000a5;
+  }
+  

@@ -1,0 +1,522 @@
+{
+  "users": [
+    {
+      "id": "64ec",
+      "fullName": "Hashim Rahman P",
+      "email": "hashimrahmanrh@gmail.com",
+      "password": "121212",
+      "confirmPassword": "121212"
+    },
+    {
+      "id": "b2aa",
+      "fullName": "test",
+      "email": "test@gmail.com",
+      "password": "131313",
+      "confirmPassword": "131313"
+    },
+    {
+      "id": "7236b1b0-82a0-4224-9267-596e064fc530",
+      "fullName": "kjb",
+      "email": "hashimrahmarh@gmail.com",
+      "password": "121212",
+      "confirmPassword": "121212"
+    },
+    {
+      "id": "53a1984c-fb21-4d7e-815c-e74fec587521",
+      "fullName": "jhfj",
+      "email": "juyfuy@gmail.com",
+      "password": "qqqqqq",
+      "confirmPassword": "qqqqqq"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "category": "All Products",
+      "image": "/src/assets/categories/Men.png",
+      "link": "/shop"
+    },
+    {
+      "id": "2",
+      "category": "Women",
+      "image": "/src/assets/categories/Women.png"
+    },
+    {
+      "id": "3",
+      "category": "Kids",
+      "image": "/src/assets/categories/Men.png"
+    },
+    {
+      "id": "4",
+      "category": "Kids",
+      "image": "/src/assets/categories/Men.png"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Air Zoom Pegasus 39",
+      "category": "Men",
+      "price": 120.00,
+      "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
+      "stock": 25
+    },
+    {
+      "id": "2",
+      "name": "UltraBoost 22",
+      "category": "Women",
+      "price": 180.00,
+      "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Adidas",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+      "stock": 15
+    },
+    {
+      "id": "3",
+      "name": "Classic Slip-On",
+      "category": "Men",
+      "price": 60.00,
+      "description": "Classic Vans slip-on sneakers, perfect for casual wear with a timeless look and comfortable fit.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "brand": "Vans",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
+      "stock": 40
+    },
+    {
+      "id": "4",
+      "name": "Chuck Taylor All Star",
+      "category": "Women",
+      "price": 55.00,
+      "description": "Iconic high-top sneakers with a canvas upper, rubber sole, and the unmistakable Converse star logo.",
+      "sizes": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Converse",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/d/o/6-wk-100-woakers-white-original-imaghzaytne8cf22.jpeg?q=70",
+      "stock": 30
+    },
+    {
+      "id": "5",
+      "name": "Kid's Flex Runner",
+      "category": "Kids",
+      "price": 50.00,
+      "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+      "stock": 20
+    },
+    {
+      "id": "6",
+      "name": "Yeezy Boost 350 V2",
+      "category": "Men",
+      "price": 220.00,
+      "description": "The popular Yeezy Boost 350 V2 combines street style with comfort, featuring Primeknit upper and Boost sole.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Adidas",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/f/h/7-boost-7-density-black-green-original-imagstzff5hqwgqx.jpeg?q=70",
+      "stock": 10
+    },
+    {
+      "id": "7",
+      "name": "Gel-Kayano 27",
+      "category": "Women",
+      "price": 160.00,
+      "description": "Stability running shoes with Gel cushioning for support and comfort on long-distance runs.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "brand": "Asics",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/v/e/-original-imah4a64wat6vsse.jpeg?q=70",
+      "stock": 18
+    },
+    {
+      "id": "8",
+      "name": "Kid's Superstar",
+      "category": "Kids",
+      "price": 70.00,
+      "description": "Classic Adidas Superstar sneakers for kids, with a durable shell toe and the signature three stripes.",
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "brand": "Adidas",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/m/t/5/7c-unisex-kids-knitted-led-light-shoes-blink-2-for-1-4-yrs-boys-original-imahf7x6ytzsgy3v.jpeg?q=70",
+      "stock": 25
+    },
+    {
+      "id": "9",
+      "name": "Jordan 1 Retro High",
+      "category": "Men",
+      "price": 170.00,
+      "description": "Iconic basketball shoes featuring premium leather and Air cushioning for comfort and style.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Jordan",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/5/o/-original-imagzjw3cyd9gf9f.jpeg?q=70",
+      "stock": 12
+    },
+    {
+      "id": "10",
+      "name": "Puma RS-X3",
+      "category": "Men",
+      "price": 110.00,
+      "description": "Chunky, bold sneakers with retro-inspired design and lightweight cushioning for all-day wear.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Puma",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/d/d/q/-original-imah4ehyqbhzmvzs.jpeg?q=70",
+      "stock": 22
+    },
+    {
+      "id": "11",
+      "name": "Nike React Infinity Run",
+      "category": "Women",
+      "price": 160.00,
+      "description": "Running shoes designed to reduce injury, with React foam cushioning for a smooth and stable ride.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/f/4/-original-imah4j6u7f2cq7tb.jpeg?q=70",
+      "stock": 16
+    },
+    {
+      "id": "12",
+      "name": "Vans Sk8-Hi",
+      "category": "Men",
+      "price": 70.00,
+      "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Vans",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
+      "stock": 35
+    },
+    {
+      "id": "13",
+      "name": "Adidas NMD_R1",
+      "category": "Women",
+      "price": 140.00,
+      "description": "Streetwear sneakers featuring Boost cushioning and a sleek, minimalist design.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Adidas",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/a/f/q/-original-imah4a5cd5hzwane.jpeg?q=70",
+      "stock": 20
+    },
+    {
+      "id": "14",
+      "name": "Nike Blazer Mid '77",
+      "category": "Men",
+      "price": 100.00,
+      "description": "Classic basketball shoes with a vintage design, perfect for both street style and athletic wear.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/y/h/f/7-dm1120-013-7-nike-platinum-tint-court-blue-white-black-original-imah4tswhdgczpjh.jpeg?q=70",
+      "stock": 28
+    },
+    {
+      "id": "15",
+      "name": "New Balance 990v5",
+      "category": "Men",
+      "price": 175.00,
+      "description": "Premium sneakers with a heritage-inspired design, featuring superior cushioning and durability.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "brand": "New Balance",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/f/z/j/-original-imagtbtdy3qrkgtn.jpeg?q=70",
+      "stock": 14
+    },
+    {
+      "id": "16",
+      "name": "Superstar Bold",
+      "category": "Women",
+      "price": 85.00,
+      "description": "Adidas Superstar with a platform sole, giving the iconic design an elevated twist.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Adidas",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/r/2/a/-original-imagxvyvj56kscgd.jpeg?q=70",
+      "stock": 18
+    },
+    {
+      "id": "17",
+      "name": "Nike Air Force 1 '07",
+      "category": "Men",
+      "price": 90.00,
+      "description": "The classic Air Force 1 in low-cut design, featuring Air cushioning and a durable leather upper.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/d/p/c/-original-imaghuj2yg7swp5s.jpeg?q=70",
+      "stock": 50
+    },
+    {
+      "id": "18",
+      "name": "Gel-Nimbus 23",
+      "category": "Women",
+      "price": 150.00,
+      "description": "High-performance running shoes with superior Gel cushioning, providing maximum comfort.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Asics",
+      "image": "https://rukminim2.flixcart.com/image/612/612/krp94sw0/shoe/q/a/n/8-1639-rindas-white-original-imag5fmavcqxttzf.jpeg?q=70",
+      "stock": 12
+    },
+    {
+      "id": "19",
+      "name": "Kid's Revolution 5",
+      "category": "Kids",
+      "price": 45.00,
+      "description": "Affordable and durable running shoes for kids, with lightweight foam for smooth strides.",
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/y/i/z/13c-master-603-action-original-imagzxhhveg5xfem.jpeg?q=70",
+      "stock": 30
+    },
+    {
+      "id": "20",
+      "name": "Fila Disruptor II",
+      "category": "Men",
+      "price": 65.00,
+      "description": "Chunky, retro sneakers with a rugged sole and bold design, perfect for everyday wear.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "brand": "Fila",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/i/y/m/9-azaro-9-fila-white-black-original-imagy65sntdcd6nz.jpeg?q=70",
+      "stock": 24
+    },
+    {
+      "id": "21",
+      "name": "Kid's Air Max 270",
+      "category": "Kids",
+      "price": 75.00,
+      "description": "A kid's version of the popular Air Max 270, with a large visible Air unit and lightweight comfort.",
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/v/0/d/4-led-shoe-hooh-original-imah28tfcgrbahdf.jpeg?q=70",
+      "stock": 18
+    },
+    {
+      "id": "22",
+      "name": "Hoka One One Clifton 8",
+      "category": "Men",
+      "price": 140.00,
+      "description": "Ultra-lightweight running shoes designed for cushioning and comfort over long distances.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Hoka",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/m/f/-original-imah4a65yqvgydb4.jpeg?q=70",
+      "stock": 14
+    },
+    {
+      "id": "23",
+      "name": "Nike Free RN 2021",
+      "category": "Women",
+      "price": 100.00,
+      "description": "Flexible running shoes with a barefoot feel, designed for natural movement and comfort.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/e/x/-original-imah4ez4wzhusmzr.jpeg?q=70",
+      "stock": 22
+    },
+    {
+      "id": "24",
+      "name": "Kid's Crocs Classic",
+      "category": "Kids",
+      "price": 30.00,
+      "description": "Classic Crocs for kids, featuring lightweight, comfortable foam and a water-friendly design.",
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "brand": "Crocs",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-sandal/2/e/s/-original-imaghryvebfu8rng.jpeg?q=70",
+      "stock": 50
+    },
+    {
+      "id": "25",
+      "name": "Adidas Superstar",
+      "category": "Men",
+      "price": 85.00,
+      "description": "The timeless Adidas Superstar sneakers with a leather upper, rubber shell toe, and iconic three stripes.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "brand": "Adidas",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/c/i/x/6-id4655-6-adidas-originals-ftwwht-ftwwht-goldmt-original-imagsutctubg8gkz.jpeg?q=70",
+      "stock": 40
+    },
+    {
+      "id": "26",
+      "name": "Kid's Old Skool",
+      "category": "Kids",
+      "price": 50.00,
+      "description": "Vans Old Skool sneakers for kids, featuring the iconic side stripe and durable canvas construction.",
+      "sizes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "brand": "Vans",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/k/1/q/5-sh-tarzan-04-kids-asian-original-imahfzr78vecbehd.jpeg?q=70",
+      "stock": 30
+    },
+    {
+      "id": "27",
+      "name": "Nike LeBron 18",
+      "category": "Men",
+      "price": 200.00,
+      "description": "Performance basketball shoes designed for LeBron James, featuring Max Air and Zoom Air cushioning.",
+      "sizes": [
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "brand": "Nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/f/h/c/10-21252500-45-nike-blue-original-imagqgdyzqffybju.jpeg?q=70",
+      "stock": 12
+    },
+    {
+      "id": "28",
+      "name": "Brooks Ghost 14",
+      "category": "Women",
+      "price": 130.00,
+      "description": "Smooth and balanced running shoes designed for comfort on long-distance runs.",
+      "sizes": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "brand": "Brooks",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/g/x/-original-imah2urtvcby9czx.jpeg?q=70",
+      "stock": 18
+    }
+  ]
+}
