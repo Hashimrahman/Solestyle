@@ -6,7 +6,7 @@
       "email": "hashimrahmanrh@gmail.com",
       "password": "121212",
       "confirmPassword": "121212",
-      "isLoggedIn": true,
+      "isLoggedIn": false,
       "cart": [
         {
           "id": "1",
@@ -53,7 +53,28 @@
       "email": "test@gmail.com",
       "password": "111111",
       "confirmPassword": "111111",
-      "isLoggedIn": false
+      "isLoggedIn": true,
+      "cart": [
+        {
+          "id": "5",
+          "name": "Kid's Flex Runner",
+          "category": "Kids",
+          "price": 4150,
+          "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+          "sizes": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "brand": "Nike",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+          "stock": 20,
+          "trending": true,
+          "quantity": 7
+        }
+      ]
     }
   ],
   "categories": [

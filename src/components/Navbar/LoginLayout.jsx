@@ -3,11 +3,14 @@ import { FaCircleUser } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { MdMenu, MdOutlineShoppingCart } from "react-icons/md";
 import { ProductContext } from "../Context/Product";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
 
 const LoginLayout = ({ open, openSet }) => {
   //   const navigate = useNavigate();
-  const { users } = useContext(ProductContext);
+  const navigate = useNavigate()
+  const { users, handleLogout } = useContext(ProductContext);
   const [currentUser, setCurrentUser] = useState(null);
   const id = localStorage.getItem("id");
 
@@ -18,12 +21,41 @@ const LoginLayout = ({ open, openSet }) => {
       setCurrentUser(user);
     }
   }, [users, id]);
+
+  // const openDetails = (user) =>{
+  //   Swal.fire({
+  //     position: "top-end",
+  //     Title: `${user.name}`,
+  //     showConfirmButton: false,
+  //     customClass: {
+  //       popup: 'swal-margin'  // Assign a custom class to the popup
+  //     }
+  //   });
+  // }
+  const openDetails = (user, handleLogout) => {
+    Swal.fire({
+      position: "top-end",
+      title: `${user.fullName}`,
+      showConfirmButton: false,
+      html: '<button id="logoutButton" class="swal2-confirm swal2-styled">Logout</button>', // Add a logout button
+      customClass: {
+        popup: 'swal-margin',
+        title : 'swal-title'
+      },
+      didRender: () => {
+        // Attach a click event listener to the logout button
+        const logoutButton = document.getElementById("logoutButton");
+        logoutButton.addEventListener("click", handleLogout);
+      }
+    });
+  };
+  
   // console.log(currentUser.fullName);
   // console.log(currentUser ? currentUser.fullName : "No user found");
   return (
     <div>
       <div className="text-l hidden md:flex gap-10 items-center justify-center">
-        <button className="text-3xl text-primary hover:bg-secondary rounded-full p-2">
+        <button className="text-3xl text-primary hover:bg-secondary rounded-full p-2" onClick={() => navigate('/cart')}>
           <MdOutlineShoppingCart />
         </button>
         <div>
@@ -33,7 +65,7 @@ const LoginLayout = ({ open, openSet }) => {
             <p className="">Loading...</p>
           )}
         </div>
-        <button className="text-3xl text-primary hover:bg-secondary rounded-lg p-2 px-4 bg-slate-200">
+        <button className="text-3xl text-primary hover:bg-secondary rounded-lg p-2 px-4 bg-slate-200" onClick={()=> openDetails(currentUser, handleLogout)}>
           <FaCircleUser />
         </button>
         

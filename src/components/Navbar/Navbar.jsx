@@ -11,6 +11,7 @@ import LogOutLayout from "./LogOutLayout";
 // import { FaCircleUser } from "react-icons/fa6";
 import LoginLayout from "./LoginLayout";
 import { FaCircleUser } from "react-icons/fa6";
+import Swal from "sweetalert2";
 // import { LoginStatus } from "../Context/Context";
 
 const Navbar = () => {
@@ -19,6 +20,14 @@ const Navbar = () => {
   const { isLoggedIn, setIsLoggedIn, users } = useContext(ProductContext);
   // const {status, setStatus} = useContext(LoginStatus)
   const id = localStorage.getItem("id");
+
+  const openDetails = () =>{
+    Swal.fire({
+      position: "top-end",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+    });
+  }
   
 
   return (
@@ -55,9 +64,9 @@ const Navbar = () => {
           {id ? (
             <div className="flex flex-row-reverse gap-4 flex-wrap ">
               <LoginLayout open={open} openSet={setOpen} />
-              <div className="flex h-full text-3xl justify-center items-center md:hidden">
+              <button className="flex h-full text-3xl justify-center items-center md:hidden" onClick={openDetails}>
                 <FaCircleUser />
-              </div>
+              </button>
             </div>
           ) : (
             <LogOutLayout open={open} openSet={setOpen} />

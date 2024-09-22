@@ -128,3 +128,14 @@
   }
 }
 
+
+.swal-margin{
+  margin-top: 2rem;
+  margin-right: 2rem;
+  
+
+}
+.swal-title{
+  color: #9147ff;
+  text-transform: uppercase;
+}
