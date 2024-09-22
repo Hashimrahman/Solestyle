@@ -2,21 +2,25 @@ export const NavbarMenu = [
     {
         id: 1,
         title: 'Home',
-        link: '/'
+        link: '/',
+        trending : false
     },
     {
         id: 2,
-        title: 'Men',
-        link: '/Men'
+        title: 'Trending',
+        link: '/trending',
+        trending : true
     },
     {
         id: 3,
-        title: 'Women',
-        link: '/women'
+        title: 'About Us',
+        link: '/about-us',
+        trending : false
     },
     {
         id: 4,
-        title: 'Kids',
-        link: '/kids'
+        title: 'Contact',
+        link: '/contact',
+        trending : false
     },
 ]

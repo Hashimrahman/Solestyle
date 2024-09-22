@@ -1,21 +1,30 @@
 // import {Link} from 'react-router-dom'
-import { MdMenu, MdOutlineShoppingCart } from "react-icons/md";
+// import { MdMenu, MdOutlineShoppingCart } from "react-icons/md";
 import SoleStyle from "../../assets/SoleStyle4.png";
 import { NavbarMenu } from "./NavbarMenu";
-import {  useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NavMobile from "./NavMobile";
-import { IoClose } from "react-icons/io5";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { IoClose } from "react-icons/io5";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { ProductContext } from "../Context/Product";
+import LogOutLayout from "./LogOutLayout";
+// import { FaCircleUser } from "react-icons/fa6";
+import LoginLayout from "./LoginLayout";
+import { FaCircleUser } from "react-icons/fa6";
 // import { LoginStatus } from "../Context/Context";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn, users } = useContext(ProductContext);
   // const {status, setStatus} = useContext(LoginStatus)
+  const id = localStorage.getItem("id");
+  
+
   return (
     <>
-      <nav className="fixed top-0 w-full m-0 p-4 backdrop-blur z-20">
-        <div className="flex justify-between items-center mx-4">
+      <nav className="fixed top-0 w-full m-0 p-4 backdrop-blur z-20 border-none outline-none">
+        <div className="flex justify-between items-center mx-4 ">
           <div className=" w-[12em]">
             <img src={SoleStyle} alt="" />
           </div>
@@ -26,44 +35,37 @@ const Navbar = () => {
                   key={index}
                   to={item.link}
                   className={({ isActive }) =>
-                    isActive ? "border-b-2 border-secondary text-secondary font-semibold" : ""
+                    isActive
+                      ? "border-b-2 border-secondary text-secondary font-semibold"
+                      : ""
                   }
                 >
-                  <div>{item.title}</div>
+                  <div className="hover:text-secondary hover:-translate-y-1 transform-all ease-in-out duration-300 relative">
+                    {item.title}
+                    {item.trending && (
+                      <div className="absolute top-[-15px] -right-2 bg-red-600/70 rounded-xl px-2 text-xs uppercase">
+                        Hot
+                      </div>
+                    )}
+                  </div>
                 </NavLink>
               ))}
             </div>
           </div>
-          <div className="text-l hidden md:flex gap-10 items-center justify-center  ">
-            <button className="text-3xl text-primary hover:bg-secondary rounded-full p-2">
-              <MdOutlineShoppingCart />
-            </button>
-            <div className="flex gap-2">
-              <button className="border-solid border-black border-2 py-2 px-4 rounded-md hover:bg-secondary hover:border-white hover:text-white "  onClick={() => navigate('/register')}>
-                Register
-              </button>
-              <button className="border-solid border-black border-2 py-2 px-4 rounded-md hover:bg-secondary hover:border-white hover:text-white "  onClick={() => navigate('/login')}>
-                Login
-              </button>
+          {id ? (
+            <div className="flex flex-row-reverse gap-4 flex-wrap ">
+              <LoginLayout open={open} openSet={setOpen} />
+              <div className="flex h-full text-3xl justify-center items-center md:hidden">
+                <FaCircleUser />
+              </div>
             </div>
-          </div>
-          <div className="inline-block md:hidden text-3xl font-extrabold text-primary">
-            <button
-              onClick={() => setOpen(!open)}
-              style={{ display: open ? "none" : "inline-block" }}
-            >
-              <MdMenu />
-            </button>
-            <button
-              onClick={() => setOpen(!open)}
-              style={{ display: open ? "inline-block" : "none" }}
-            >
-              <IoClose />
-            </button>
-          </div>
+          ) : (
+            <LogOutLayout open={open} openSet={setOpen} />
+          )}
         </div>
       </nav>
       <NavMobile open={open} />
+      <Outlet />
     </>
   );
 };

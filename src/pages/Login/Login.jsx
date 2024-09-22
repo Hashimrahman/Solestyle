@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SoleStyle from "../../assets/SoleStyle.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import { LoginStatus } from "../Context/Context";
+import { ProductContext } from "../../components/Context/Product";
 
 const Login = () => {
-  // const {setStatus} = useContext(LoginStatus)
+  const { isLoggedIn, setIsLoggedIn,users, handleLogin } = useContext(ProductContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -16,32 +16,56 @@ const Login = () => {
   const [errors, setError] = useState({});
   const [valid, setValid] = useState(true);
 
+  // UseEffect to load login state from localStorage on mount
+  // useEffect(() => {
+  //   const storedLoginState = localStorage.getItem("isLoggedIn");
+  //   if (storedLoginState === "true") {
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //   }
+  // }, [setIsLoggedIn]);
+
+  // // Function to handle login and set localStorage
+  // const handleLogin = () => {
+  //   setIsLoggedIn(true);
+  //   localStorage.setItem("isLoggedIn", "true");
+  // };
+
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  //   localStorage.removeItem("isLoggedIn");
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let isValid = true;
     let validationErrors = {};
 
-    if (formData.email.trim() == "" || formData.email === null) {
+    // Validation logic
+    if (formData.email.trim() === "" || formData.email === null) {
       isValid = false;
       validationErrors.email = "Email Required";
-    } else if (!/\S+@\S+.\S/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       isValid = false;
       validationErrors.email = "Email Not Valid";
     }
 
-    if (formData.password.trim() == "" || formData.password === null) {
+    if (formData.password.trim() === "" || formData.password === null) {
       isValid = false;
       validationErrors.password = "Password Required";
     } else if (formData.password.length < 6) {
       isValid = false;
-      validationErrors.password = "Password Should be atleast 6 charecters";
+      validationErrors.password = "Password Should be at least 6 characters";
     }
 
     if (!isValid) {
       setError(validationErrors);
       setValid(false);
+      return; // Exit if validation fails
     }
 
+    // Axios call to check user credentials
     axios
       .get("http://localhost:8000/users")
       .then((res) => {
@@ -52,8 +76,24 @@ const Login = () => {
           setValid(false);
         } else if (user.password === formData.password) {
           alert("Login Successful");
+          // localStorage.setItem("id",user.id);
+          handleLogin(user.id);
+          axios
+            .patch(`http://localhost:8000/users/${user.id}`, {
+              isLoggedIn: true,
+            })
+            .then(() => {
+              console.log("User login status updated to true");
+              navigate("/");
+            })
+            .catch((err) => {
+              console.log("Error updating login status:", err);
+              alert("Failed to update login status");
+            });
           navigate("/");
-          // setStatus(false)
+          localStorage.setItem("id",user.id);
+          localStorage.setItem("name",user.fullName);
+          localStorage.setItem("email",user.email);
         } else {
           validationErrors.password = "Wrong Password";
           setError(validationErrors);
@@ -62,8 +102,9 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
-        alert("An Unexpected error occured");
+        alert("An Unexpected error occurred");
       });
+
     setError(validationErrors);
     setValid(isValid);
   };

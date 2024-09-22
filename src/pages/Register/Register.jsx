@@ -70,14 +70,14 @@ const Register = () => {
       }
 
       // Create new id for each user 
-      const newUser = { ...formData, id: uuidv4() };
+      const newUser = { ...formData, id: uuidv4() , isLoggedIn : false };
 
       await axios.post("http://localhost:8000/users", newUser); //post user details to json server
       alert("Registration Successful");
       navigate("/login");
     } catch (error) {
       console.log("Error during registration:", error);
-      alert("An error occurred. Please try again later.");
+      alert("An error occurred. Please try again later."); // Error message
     }
   };
 
