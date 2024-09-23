@@ -14,8 +14,7 @@ export const ProductProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [count, setCount] = useState();
   const navigate = useNavigate();
-  const id = localStorage.getItem("id");
-  
+  // const id = localStorage.getItem("id");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -55,17 +54,6 @@ export const ProductProvider = ({ children }) => {
     setKids(FilteredKids);
   }, [products]);
 
-  // useEffect(() => {
-  //   const storedLoginState = localStorage.getItem('isLoggedIn');
-  //   if (storedLoginState === true) {
-  //     setIsLoggedIn(true);
-  //   } else {
-  //     setIsLoggedIn(false);
-  //   }
-  //   console.log(isLoggedIn);
-
-  // }, [setIsLoggedIn]);
-
   const handleLogin = (userId) => {
     setIsLoggedIn(true);
     localStorage.setItem("isLoggedIn", true);
@@ -82,43 +70,14 @@ export const ProductProvider = ({ children }) => {
     localStorage.removeItem("email");
     localStorage.removeItem("isLoggedIn");
     setCart([]);
-    
+
     navigate("/login");
   };
-
-  // const handleAddToCart = (elem) => {
-  //   const loggedIn = localStorage.getItem("id");
-  //   if (!loggedIn) {
-  //     alert("Please Login");
-  //   } else {
-  //     console.log("logged in");
-  //     let isPresent = false;
-  //     cart.forEach((item) => {
-  //       if (item.id == elem.id) {
-  //         isPresent = true;
-  //       }
-  //     });
-  //     if (isPresent) {
-  //       alert("Item Already Added");
-  //     } 
-  //     else {
-  //       axios
-  //         .patch(`http://localhost:8000/users/${id}`, { cart: [...cart, elem] })
-  //         .then((res) => console.log(res))
-  //         .catch((err) => console.log("Error" + err));
-  //       setCart([...cart, elem]);
-  //       alert("Item Added Successfully");
-  //       console.log(cart, elem);
-        
-        
-  //     }
-  //   }
-  // };
 
   const loadCart = (userId) => {
     //load the cart from localStorage first
     const savedCart = localStorage.getItem(`cart_${userId}`);
-  
+
     if (savedCart) {
       // If cart exists in localStorage, load it into the state
       setCart(JSON.parse(savedCart));
@@ -129,7 +88,7 @@ export const ProductProvider = ({ children }) => {
         .then((res) => {
           const userCart = res.data.cart || [];
           setCart(userCart);
-  
+
           // Save the cart to localStorage
           localStorage.setItem(`cart_${userId}`, JSON.stringify(userCart));
         })
@@ -138,43 +97,44 @@ export const ProductProvider = ({ children }) => {
         });
     }
   };
-  
+
   useEffect(() => {
     const loggedInUserId = localStorage.getItem("id");
     if (loggedInUserId) {
       loadCart(loggedInUserId); // Load the cart on component mount or refresh
     }
   }, []);
-  
 
   const handleAddToCart = (elem) => {
     const loggedInUserId = localStorage.getItem("id");
-  
+
     if (!loggedInUserId) {
       alert("Please Login");
     } else {
       console.log("User logged in:", loggedInUserId);
-  
-      // Check if the item is already in the cart
+
       let isPresent = cart.some((item) => item.id === elem.id);
-  
+
       if (isPresent) {
         alert("Item Already Added");
       } else {
-        // Add the item to the cart
         const updatedCart = [...cart, elem];
-  
-        // Update in the db.json
+
         axios
-          .patch(`http://localhost:8000/users/${loggedInUserId}`, { cart: updatedCart })
+          .patch(`http://localhost:8000/users/${loggedInUserId}`, {
+            cart: updatedCart,
+          })
           .then((res) => {
             console.log("Cart updated in the database:", res.data);
-  
+
             setCart(updatedCart);
-  
+
             // Save in localStorage
-            localStorage.setItem(`cart_${loggedInUserId}`, JSON.stringify(updatedCart));
-  
+            localStorage.setItem(
+              `cart_${loggedInUserId}`,
+              JSON.stringify(updatedCart)
+            );
+
             alert("Item Added Successfully");
           })
           .catch((err) => {
@@ -183,7 +143,6 @@ export const ProductProvider = ({ children }) => {
       }
     }
   };
-  
 
   return (
     <ProductContext.Provider
@@ -200,7 +159,7 @@ export const ProductProvider = ({ children }) => {
         handleAddToCart,
         count,
         setCount,
-        cart
+        cart,
       }}
     >
       {children}

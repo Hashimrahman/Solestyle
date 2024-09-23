@@ -6,8 +6,27 @@
       "email": "hashimrahmanrh@gmail.com",
       "password": "121212",
       "confirmPassword": "121212",
-      "isLoggedIn": false,
+      "isLoggedIn": true,
       "cart": [
+        {
+          "id": "7",
+          "name": "Gel-Kayano 27",
+          "category": "Women",
+          "price": 13280,
+          "description": "Stability running shoes with Gel cushioning for support and comfort on long-distance runs.",
+          "sizes": [
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "brand": "Asics",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/v/e/-original-imah4a64wat6vsse.jpeg?q=70",
+          "stock": 18,
+          "trending": false,
+          "quantity": 1
+        },
         {
           "id": "1",
           "name": "Air Zoom Pegasus 39",
@@ -25,25 +44,26 @@
           "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
           "stock": 25,
           "trending": true,
-          "quantity": 4
+          "quantity": 1
         },
         {
-          "id": "2",
-          "name": "UltraBoost 22",
-          "category": "Women",
-          "price": 14940,
-          "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+          "id": "12",
+          "name": "Vans Sk8-Hi",
+          "category": "Men",
+          "price": 5810,
+          "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
           "sizes": [
-            6,
-            7,
             8,
-            9
+            9,
+            10,
+            11,
+            12
           ],
-          "brand": "Adidas",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
-          "stock": 15,
-          "trending": true,
-          "quantity": 2
+          "brand": "Vans",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
+          "stock": 35,
+          "trending": false,
+          "quantity": 1
         }
       ]
     },
@@ -75,6 +95,91 @@
           "quantity": 7
         }
       ]
+    },
+    {
+      "id": "5889bced-8d40-43e5-86f6-83198bd2a9b9",
+      "fullName": "dev",
+      "email": "dev@bridgeon.in",
+      "password": "dev@123",
+      "confirmPassword": "dev@123",
+      "isLoggedIn": true,
+      "cart": [
+        {
+          "id": "4",
+          "name": "Chuck Taylor All Star",
+          "category": "Women",
+          "price": 4565,
+          "description": "Iconic high-top sneakers with a canvas upper, rubber sole, and the unmistakable Converse star logo.",
+          "sizes": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "brand": "Converse",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/d/o/6-wk-100-woakers-white-original-imaghzaytne8cf22.jpeg?q=70",
+          "stock": 30,
+          "trending": false,
+          "quantity": 4
+        },
+        {
+          "id": "1",
+          "name": "Air Zoom Pegasus 39",
+          "category": "Men",
+          "price": 9960,
+          "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
+          "sizes": [
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "brand": "Nike",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
+          "stock": 25,
+          "trending": true,
+          "quantity": 2
+        },
+        {
+          "id": "11",
+          "name": "Nike React Infinity Run",
+          "category": "Women",
+          "price": 13280,
+          "description": "Running shoes designed to reduce injury, with React foam cushioning for a smooth and stable ride.",
+          "sizes": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "brand": "Nike",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/f/4/-original-imah4j6u7f2cq7tb.jpeg?q=70",
+          "stock": 16,
+          "trending": true,
+          "quantity": 1
+        },
+        {
+          "id": "12",
+          "name": "Vans Sk8-Hi",
+          "category": "Men",
+          "price": 5810,
+          "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
+          "sizes": [
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "brand": "Vans",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
+          "stock": 35,
+          "trending": false,
+          "quantity": 1
+        }
+      ]
     }
   ],
   "categories": [
@@ -86,18 +191,21 @@
     },
     {
       "id": "2",
-      "category": "Women",
-      "image": "/src/assets/categories/Women.png"
+      "category": "Men",
+      "image": "/src/assets/categories/Women.png",
+      "link": "/men"
     },
     {
       "id": "3",
-      "category": "Kids",
-      "image": "/src/assets/categories/Men.png"
+      "category": "Women",
+      "image": "/src/assets/categories/Men.png",
+      "link": "/women"
     },
     {
       "id": "4",
       "category": "Kids",
-      "image": "/src/assets/categories/Men.png"
+      "image": "/src/assets/categories/Men.png",
+      "link": "/kids"
     }
   ],
   "products": [
@@ -118,7 +226,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
       "stock": 25,
       "trending": true,
-      "quantity": 4
+      "quantity": 2
     },
     {
       "id": "2",
@@ -154,7 +262,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
       "stock": 40,
       "trending": false,
-      "quantity": 6
+      "quantity": 1
     },
     {
       "id": "4",
@@ -211,7 +319,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/f/h/7-boost-7-density-black-green-original-imagstzff5hqwgqx.jpeg?q=70",
       "stock": 10,
       "trending": true,
-      "quantity": 1
+      "quantity": 2
     },
     {
       "id": "7",

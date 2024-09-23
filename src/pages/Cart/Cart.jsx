@@ -1,19 +1,18 @@
 import { useEffect, useState, useContext } from "react";
-// import { ProductContext } from "../../components/Context/Product";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
 
 const Cart = () => {
-  //   const { incrementQuantity, decrementQuantity } = useContext(ProductContext);
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
-  // Function to load separate cart for each of the user from localStorage
+  // load separate cart for each of the user from localStorage
   const loadCart = (userId) => {
     const savedCart = localStorage.getItem(`cart_${userId}`);
 
     if (savedCart) {
-      setCart(JSON.parse(savedCart)); // Load from localStorage
+      setCart(JSON.parse(savedCart));
     } else {
       axios
         .get(`http://localhost:8000/users/${userId}`)
@@ -30,9 +29,8 @@ const Cart = () => {
     }
   };
   const saveCart = (userId, updatedCart) => {
-    localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart)); // Save to localStorage
+    localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
 
-    // Optionally update the backend (optional)
     axios
       .patch(`http://localhost:8000/users/${userId}`, { cart: updatedCart })
       .then((res) => {
@@ -58,8 +56,8 @@ const Cart = () => {
     const updatedCart = cart.map((item) =>
       item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
     );
-    setCart(updatedCart); // Update the state
-    saveCart(loggedInUserId, updatedCart); // Save the updated cart
+    setCart(updatedCart); 
+    saveCart(loggedInUserId, updatedCart); 
   };
 
   // Function to decrement quantity
@@ -70,14 +68,21 @@ const Cart = () => {
         ? { ...item, quantity: item.quantity - 1 }
         : item
     );
-    setCart(updatedCart); // Update the state
-    saveCart(loggedInUserId, updatedCart); // Save the updated cart
+    setCart(updatedCart);
+    saveCart(loggedInUserId, updatedCart);
   };
   const removeItem = (itemId) => {
     const loggedInUserId = localStorage.getItem("id");
-    const updatedCart = cart.filter((item) => item.id !== itemId); // Remove the item
-    setCart(updatedCart); // Update the state
-    saveCart(loggedInUserId, updatedCart); // Save the updated cart
+    const updatedCart = cart.filter((item) => item.id !== itemId); 
+    setCart(updatedCart);
+    saveCart(loggedInUserId, updatedCart); 
+    axios.patch(`http://localhost:8000/users/${loggedInUserId}`, {
+      cart: updatedCart
+    })
+    .then((res) => {console.log("Cart Updated Successfully", res.data);
+    })
+    .catch((err =>{console.log("Error in removing item", err);
+    }))
   };
 
   const totalPrice = cart.reduce(
@@ -86,14 +91,14 @@ const Cart = () => {
   );
 
   return (
-    <div className="container mx-auto mt-10">
-      <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+    <div className="container mx-auto mt-20">
+      <h1 className="text-3xl font-bold mb-6 mx-5">Your Cart</h1>
       {cart.length === 0 ? (
         <div className="text-center">
           <h2 className="text-xl">Your cart is empty</h2>
         </div>
       ) : (
-        <div className="bg-white shadow-md rounded-lg p-4">
+        <div className="bg-white shadow-md rounded-lg p-4 mx-5">
           {cart.map((item) => (
             <div
               key={item.id}
@@ -136,12 +141,13 @@ const Cart = () => {
           ))}
           <div className="flex justify-between items-center mt-4">
             <h2 className="text-xl font-bold">Total Price: {totalPrice} ₹</h2>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300" onClick={() => {navigate('/submit')}}>
               Checkout
             </button>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

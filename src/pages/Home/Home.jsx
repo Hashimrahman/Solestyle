@@ -1,3 +1,4 @@
+import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import Carousel from "./Carousel";
 import Category from "./Category";
@@ -11,6 +12,7 @@ const Home = () => {
         <Carousel /> 
       </div>
       <Category />
+      <Footer />
     </>
   );
 };

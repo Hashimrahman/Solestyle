@@ -16,19 +16,38 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  // const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, users } = useContext(ProductContext);
-  // const {status, setStatus} = useContext(LoginStatus)
+  const { users, handleLogout } = useContext(ProductContext);
+  const [currentUser, setCurrentUser] = useState(null);
   const id = localStorage.getItem("id");
 
-  const openDetails = () =>{
+  useEffect(() => {
+    const user = users.find((item) => item.id === id);
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, [users, id]);
+
+  const openDetails = (user, handleLogout) => {
     Swal.fire({
       position: "top-end",
-      title: "Your work has been saved",
       showConfirmButton: false,
+      html: `<div class="swal-div">
+        <h1 class='swal-name'>${user.fullName}</h1>
+        <p >${user.email}</p>
+         <button id="logoutButton" class="swal2-confirm swal-button">Logout</button>
+      </div>`,
+      customClass: {
+        popup: "swal-margin",
+        title: "swal-title",
+      },
+      didRender: () => {
+        const logoutButton = document.getElementById("logoutButton");
+        logoutButton.addEventListener("click", () => {
+          handleLogout(), Swal.close();
+        });
+      },
     });
-  }
-  
+  };
 
   return (
     <>
@@ -64,7 +83,10 @@ const Navbar = () => {
           {id ? (
             <div className="flex flex-row-reverse gap-4 flex-wrap ">
               <LoginLayout open={open} openSet={setOpen} />
-              <button className="flex h-full text-3xl justify-center items-center md:hidden" onClick={openDetails}>
+              <button
+                className="flex h-full text-3xl justify-center items-center md:hidden"
+                onClick={() => openDetails(currentUser, handleLogout)}
+              >
                 <FaCircleUser />
               </button>
             </div>

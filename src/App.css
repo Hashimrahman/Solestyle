@@ -130,12 +130,30 @@
 
 
 .swal-margin{
-  margin-top: 2rem;
+  margin-top: 4rem;
   margin-right: 2rem;
+  width: auto;
+  height: auto;
+  padding: 0;
   
-
 }
 .swal-title{
   color: #9147ff;
+  
+  font-size: large;
+}
+.swal-div{
+  text-align: left;
+}
+
+.swal-name{
   text-transform: uppercase;
+}
+
+.swal-button{
+  padding: 0.5rem 1rem;
+  background-color: #fb923c;
+  margin: 1rem 0rem;
+  border-radius: 4px;
+  color: black;
 }

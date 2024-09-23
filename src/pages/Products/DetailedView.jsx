@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../../components/Context/Product";
 import axios from "axios";
+import Footer from "../../components/Footer/Footer";
 
 const DetailedView = () => {
   const { id } = useParams();
@@ -17,7 +18,6 @@ const DetailedView = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsLoading(false);
     };
-
     loadData();
   }, []);
 
@@ -45,7 +45,7 @@ const DetailedView = () => {
   };
 
   const decrementCount = () => {
-    if (count > 0) {
+    if (count > 1) {
       updateQuantity(product.id, count - 1);
     }
   };
@@ -144,6 +144,7 @@ const DetailedView = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

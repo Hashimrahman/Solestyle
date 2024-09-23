@@ -13,6 +13,7 @@ import Women from "./pages/Products/Women";
 import Kids from "./pages/Products/Kids";
 import DetailedView from "./pages/Products/DetailedView";
 import Cart from "./pages/Cart/Cart";
+import CheckOut from "./pages/CheckOut/Checkout";
 // import { ContextProvider } from "./components/Context/Context";
 
 function App() {
@@ -28,12 +29,15 @@ function App() {
             <Route path="men" element={<Men />} />
             <Route path="women" element={<Women />} />
             <Route path="kids" element={<Kids />} />
+            <Route path="cart" element={<Cart />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<h1>Not Found</h1>} /> 
+
+          <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="/submit" element={<CheckOut />} />
         </Routes>
+        {/* <Route path="/submit" element={<CheckOut />}></Route> */}
       </ProductProvider>
     </>
   );

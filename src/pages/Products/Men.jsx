@@ -6,6 +6,8 @@ const Men = () => {
   const navigate = useNavigate();
   const { men } = useContext(ProductContext);
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [searchProducts, setSearchProducts] = useState(men);
 
   useEffect(() => {
     const loadData = async () => {
@@ -15,6 +17,17 @@ const Men = () => {
 
     loadData();
   }, []);
+  useEffect(() => {
+    if (search) {
+      const filtered = men.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setSearchProducts(filtered);
+    }
+    else{
+      setSearchProducts(men)
+    }
+  },[search, men]);
 
   if (isLoading) {
     return (
@@ -37,6 +50,15 @@ const Men = () => {
     <>
       <div className="mt-20 text-center relative">
         <h1 className="text-3xl font-bold">Explore SoleStyle</h1>
+        <div className="my-6">
+          <input
+            type="text"
+            placeholder="Search for products..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border-2 border-gray-300 rounded-lg p-2 w-2/3 sm:w-1/3"
+          />
+        </div>
         <div className="sticky top-16 z-50 backdrop-blur border-none outline-none text-secondary">
           <div className="w-full h-auto p-4 flex flex-wrap justify-around items-center my-4">
             <Link to='/shop'><h4 className="cursor-pointer">All Products</h4></Link>
@@ -46,14 +68,22 @@ const Men = () => {
           </div>
         </div>
         <div className="flex flex-wrap mt-8 items-center justify-center">
-          {men.map((men) => (
-            <div
-              key={men.id}
-              className="w-full sm:w-1/2 lg:w-1/4 h-auto p-4 flex items-center justify-center transition-all ease-in-out duration-500"
-            >
-              <ProductCard men={men} navigate={navigate} />
-            </div>
-          ))}
+          {
+            searchProducts.length > 0 ? (
+              searchProducts.map((men) => (
+                <div
+                  key={men.id}
+                  className="w-full sm:w-1/2 lg:w-1/4 h-auto p-4 flex items-center justify-center transition-all ease-in-out duration-500"
+                >
+                  <ProductCard men={men} navigate={navigate} />
+                </div>
+              ))
+
+            ) : (
+              <p>No Products Found For the term `{search}`</p>
+            )
+          }
+          {}
         </div>
       </div>
     </>
