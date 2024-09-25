@@ -12,13 +12,17 @@ import LogOutLayout from "./LogOutLayout";
 import LoginLayout from "./LoginLayout";
 import { FaCircleUser } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { MdOutlineShoppingCart } from "react-icons/md";
 // import { LoginStatus } from "../Context/Context";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { users, handleLogout } = useContext(ProductContext);
   const [currentUser, setCurrentUser] = useState(null);
+  const [cartLength, setCartLength] = useState(0);
+
   const id = localStorage.getItem("id");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const user = users.find((item) => item.id === id);
@@ -26,6 +30,10 @@ const Navbar = () => {
       setCurrentUser(user);
     }
   }, [users, id]);
+  useEffect(()=>{
+    const cartLength = currentUser?.cart?.length || 0;
+    setCartLength(cartLength); 
+  },[currentUser])
 
   const openDetails = (user, handleLogout) => {
     Swal.fire({
@@ -89,6 +97,12 @@ const Navbar = () => {
               >
                 <FaCircleUser />
               </button>
+              <div className="md:hidden">
+                <button className="relative h-full text-3xl" onClick={() => navigate("/cart")}>
+                  <MdOutlineShoppingCart />
+                  <p className="absolute -top-4 -right-5 text-base bg-red-500 px-2 rounded-full">{cartLength}</p>
+                </button>
+              </div>
             </div>
           ) : (
             <LogOutLayout open={open} openSet={setOpen} />

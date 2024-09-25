@@ -14,6 +14,10 @@ import Kids from "./pages/Products/Kids";
 import DetailedView from "./pages/Products/DetailedView";
 import Cart from "./pages/Cart/Cart";
 import CheckOut from "./pages/CheckOut/Checkout";
+import Payment from "./pages/CheckOut/Payment";
+import Orders from "./pages/CheckOut/Orders";
+import AdminPage from "./pages/Admin/Admin";
+import ProfilePage from "./pages/Home/Profile";
 // import { ContextProvider } from "./components/Context/Context";
 
 function App() {
@@ -36,6 +40,10 @@ function App() {
 
           <Route path="*" element={<h1>Not Found</h1>} />
           <Route path="/submit" element={<CheckOut />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         {/* <Route path="/submit" element={<CheckOut />}></Route> */}
       </ProductProvider>

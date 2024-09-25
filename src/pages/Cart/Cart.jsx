@@ -56,8 +56,8 @@ const Cart = () => {
     const updatedCart = cart.map((item) =>
       item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
     );
-    setCart(updatedCart); 
-    saveCart(loggedInUserId, updatedCart); 
+    setCart(updatedCart);
+    saveCart(loggedInUserId, updatedCart);
   };
 
   // Function to decrement quantity
@@ -73,16 +73,20 @@ const Cart = () => {
   };
   const removeItem = (itemId) => {
     const loggedInUserId = localStorage.getItem("id");
-    const updatedCart = cart.filter((item) => item.id !== itemId); 
+    const updatedCart = cart.filter((item) => item.id !== itemId);
     setCart(updatedCart);
-    saveCart(loggedInUserId, updatedCart); 
-    axios.patch(`http://localhost:8000/users/${loggedInUserId}`, {
-      cart: updatedCart
-    })
-    .then((res) => {console.log("Cart Updated Successfully", res.data);
-    })
-    .catch((err =>{console.log("Error in removing item", err);
-    }))
+    saveCart(loggedInUserId, updatedCart);
+    axios
+      .patch(`http://localhost:8000/users/${loggedInUserId}`, {
+        cart: updatedCart,
+      })
+      .then((res) => {
+        console.log("Cart Updated Successfully", res.data);
+      })
+      .catch((err) => {
+        console.log("Error in removing item", err);
+      });
+    window.location.reload();
   };
 
   const totalPrice = cart.reduce(
@@ -130,8 +134,8 @@ const Cart = () => {
                     +
                   </button>
                 </div>
-                <button 
-                  onClick={() => removeItem(item.id)} 
+                <button
+                  onClick={() => removeItem(item.id)}
                   className="border px-2 py-1 rounded-md bg-red-500 text-white hover:bg-red-600"
                 >
                   Remove
@@ -141,7 +145,12 @@ const Cart = () => {
           ))}
           <div className="flex justify-between items-center mt-4">
             <h2 className="text-xl font-bold">Total Price: {totalPrice} ₹</h2>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300" onClick={() => {navigate('/submit')}}>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              onClick={() => {
+                navigate("/submit");
+              }}
+            >
               Checkout
             </button>
           </div>

@@ -13,8 +13,9 @@ export const ProductProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [cart, setCart] = useState([]);
   const [count, setCount] = useState();
+  const [cartLength, setCartLength] = useState(0);
   const navigate = useNavigate();
-  // const id = localStorage.getItem("id");
+  const id = localStorage.getItem("id");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -71,7 +72,7 @@ export const ProductProvider = ({ children }) => {
     localStorage.removeItem("isLoggedIn");
     setCart([]);
 
-    navigate("/login");
+    navigate("/");
   };
 
   const loadCart = (userId) => {
@@ -134,6 +135,8 @@ export const ProductProvider = ({ children }) => {
               `cart_${loggedInUserId}`,
               JSON.stringify(updatedCart)
             );
+            const length = localStorage.getItem(`cart_${id}`);
+            setCartLength(length);
 
             alert("Item Added Successfully");
           })
@@ -143,6 +146,12 @@ export const ProductProvider = ({ children }) => {
       }
     }
   };
+  // useEffect(() => {
+  //   const length = localStorage.getItem(`cart_${id}`);
+  //   setCartLength(length);
+  // }, [id]);
+
+  // const cartLength = localStorage.getItem(`cart_${id}`);
 
   return (
     <ProductContext.Provider
@@ -160,6 +169,7 @@ export const ProductProvider = ({ children }) => {
         count,
         setCount,
         cart,
+        cartLength,
       }}
     >
       {children}

@@ -9,6 +9,11 @@ const AllProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [searchProducts, setSearchProducts] = useState(products);
+  const [categorizedProduct, setCategorizedProduct] = useState(products);
+  const [men, setMen] = useState([]);
+  const [women, setWomen] = useState([]);
+  const [kids, setKids] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     const loadData = async () => {
@@ -20,16 +25,34 @@ const AllProducts = () => {
   }, []);
 
   useEffect(() => {
+    const FilteredMen = products.filter(
+      (product) => product.category === "Men"
+    );
+    setMen(FilteredMen);
+    const FilteredWomen = products.filter(
+      (product) => product.category === "Women"
+    );
+    setWomen(FilteredWomen);
+    const FilteredKids = products.filter(
+      (product) => product.category === "Kids"
+    );
+    setKids(FilteredKids);
+  }, [products]);
+  const handleCategory = (category, productList) => {
+    setActiveCategory(category);
+    setCategorizedProduct(productList);
+  };
+
+  useEffect(() => {
     if (search) {
-      const filtered = products.filter((product) =>
+      const filtered = categorizedProduct.filter((product) =>
         product.name.toLowerCase().includes(search.toLowerCase())
       );
       setSearchProducts(filtered);
+    } else {
+      setSearchProducts(categorizedProduct);
     }
-    else{
-      setSearchProducts(products)
-    }
-  },[search, products]);
+  }, [search, categorizedProduct]);
 
   if (isLoading) {
     return (
@@ -63,37 +86,62 @@ const AllProducts = () => {
         </div>
         <div className="sticky top-16 z-20 backdrop-blur border-none outline-none text-secondary">
           <div className="w-full h-auto p-4 flex flex-wrap justify-around items-center my-4">
-            <Link to="/shop">
-              <h4 className="cursor-pointer">All Products</h4>
-            </Link>
-            <Link to="/men">
-              <h4 className="cursor-pointer">Men</h4>
-            </Link>
-            <Link to="/women">
-              <h4 className="cursor-pointer">Women</h4>
-            </Link>
-            <Link to="/kids">
-              <h4 className="cursor-pointer">Kids</h4>
-            </Link>
+            <button
+              className={`cursor-pointer ${
+                activeCategory === "All"
+                  ? "text-secondary font-bold text-lg tranform-all ease-in-out duration-500"
+                  : "text-primary"
+              } px-4 py-2 rounded-lg`}
+              onClick={() => handleCategory("All", products)}
+            >
+              All Products
+            </button>
+            <button
+              className={`cursor-pointer ${
+                activeCategory === "Men"
+                  ? "text-secondary font-bold text-lg tranform-all ease-in-out duration-500"
+                  : "text-primary"
+              } px-4 py-2 rounded-lg`}
+              onClick={() => handleCategory("Men", men)}
+            >
+              Men
+            </button>
+            <button
+              className={`cursor-pointer ${
+                activeCategory === "Women"
+                  ? "text-secondary font-bold text-lg tranform-all ease-in-out duration-500"
+                  : "text-primary"
+              } px-4 py-2 rounded-lg`}
+              onClick={() => handleCategory("Women", women)}
+            >
+              Women
+            </button>
+            <button
+              className={`cursor-pointer ${
+                activeCategory === "Kids"
+                  ? "text-secondary font-bold text-lg tranform-all ease-in-out duration-500"
+                  : "text-primary"
+              } px-4 py-2 rounded-lg`}
+              onClick={() => handleCategory("Kids", kids)}
+            >
+              Kids
+            </button>
           </div>
         </div>
-        <div className="flex flex-wrap mt-8 items-center justify-center">
-          {
-            searchProducts.length > 0 ? (
-              searchProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="w-full sm:w-1/2 lg:w-1/4 h-auto p-4 flex items-center justify-center transition-all ease-in-out duration-500"
-                >
-                  <ProductCard product={product} navigate={navigate} />
-                </div>
-              ))
 
-            ) : (
-              <p>No Products Found For the term `{search}`</p>
-            )
-          }
-          {}
+        <div className="flex flex-wrap mt-8 items-center justify-center">
+          {searchProducts.length > 0 ? (
+            searchProducts.map((product) => (
+              <div
+                key={product.id}
+                className="w-full sm:w-1/2 lg:w-1/4 h-auto p-4 flex items-center justify-center transition-all ease-in-out duration-500"
+              >
+                <ProductCard product={product} navigate={navigate} />
+              </div>
+            ))
+          ) : (
+            <p>No Products Found For the term `{search}`</p>
+          )}
         </div>
       </div>
       <Footer />

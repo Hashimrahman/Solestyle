@@ -9,61 +9,129 @@
       "isLoggedIn": true,
       "cart": [
         {
-          "id": "7",
-          "name": "Gel-Kayano 27",
+          "id": "2",
+          "name": "UltraBoost 22",
           "category": "Women",
-          "price": 13280,
-          "description": "Stability running shoes with Gel cushioning for support and comfort on long-distance runs.",
+          "price": 14940,
+          "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
           "sizes": [
             6,
             7,
             8,
-            9,
-            10
+            9
           ],
-          "brand": "Asics",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/v/e/-original-imah4a64wat6vsse.jpeg?q=70",
-          "stock": 18,
-          "trending": false,
-          "quantity": 1
-        },
-        {
-          "id": "1",
-          "name": "Air Zoom Pegasus 39",
-          "category": "Men",
-          "price": 9960,
-          "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
-          "sizes": [
-            8,
-            9,
-            10,
-            11,
-            12
-          ],
-          "brand": "Nike",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
-          "stock": 25,
+          "brand": "Adidas",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+          "stock": 15,
           "trending": true,
-          "quantity": 1
+          "quantity": 2
+        }
+      ],
+      "address": {
+        "fullName": "Hashim Rahman",
+        "email": "hashimrahmanrh@gmail.com",
+        "phone": "9072827658",
+        "streetAddress": "Pilakkoth House, Manakkadave, Pantheerankave P O",
+        "pincode": "673019",
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "country": "India"
+      },
+      "orders": [
+        {
+          "orderId": "2024-09-24T05:32:20.453Z",
+          "products": [
+            {
+              "id": "3",
+              "name": "Classic Slip-On",
+              "category": "Men",
+              "price": 4980,
+              "description": "Classic Vans slip-on sneakers, perfect for casual wear with a timeless look and comfortable fit.",
+              "sizes": [
+                8,
+                9,
+                10,
+                11
+              ],
+              "brand": "Vans",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
+              "stock": 40,
+              "trending": false,
+              "quantity": 1
+            }
+          ],
+          "orderDate": "2024-09-24T05:32:20.453Z",
+          "status": "Paid"
         },
         {
-          "id": "12",
-          "name": "Vans Sk8-Hi",
-          "category": "Men",
-          "price": 5810,
-          "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
-          "sizes": [
-            8,
-            9,
-            10,
-            11,
-            12
+          "orderId": "2024-09-24T05:34:33.316Z",
+          "products": [
+            {
+              "id": "2",
+              "name": "UltraBoost 22",
+              "category": "Women",
+              "price": 14940,
+              "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+              "sizes": [
+                6,
+                7,
+                8,
+                9
+              ],
+              "brand": "Adidas",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+              "stock": 15,
+              "trending": true,
+              "quantity": 2
+            }
           ],
-          "brand": "Vans",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
-          "stock": 35,
-          "trending": false,
-          "quantity": 1
+          "orderDate": "2024-09-24T05:34:33.316Z",
+          "status": "Paid"
+        },
+        {
+          "orderId": "2024-09-24T05:42:18.129Z",
+          "products": [
+            {
+              "id": "6",
+              "name": "Yeezy Boost 350 V2",
+              "category": "Men",
+              "price": 18260,
+              "description": "The popular Yeezy Boost 350 V2 combines street style with comfort, featuring Primeknit upper and Boost sole.",
+              "sizes": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "brand": "Adidas",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/f/h/7-boost-7-density-black-green-original-imagstzff5hqwgqx.jpeg?q=70",
+              "stock": 10,
+              "trending": true,
+              "quantity": 2
+            },
+            {
+              "id": "7",
+              "name": "Gel-Kayano 27",
+              "category": "Women",
+              "price": 13280,
+              "description": "Stability running shoes with Gel cushioning for support and comfort on long-distance runs.",
+              "sizes": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "brand": "Asics",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/v/e/-original-imah4a64wat6vsse.jpeg?q=70",
+              "stock": 18,
+              "trending": false,
+              "quantity": 1
+            }
+          ],
+          "orderDate": "2024-09-24T05:42:18.129Z",
+          "status": "Paid"
         }
       ]
     },
@@ -727,6 +795,32 @@
       "stock": 10,
       "trending": false,
       "quantity": 1
+    },
+    {
+      "id": "8d29",
+      "name": "hjhiuhu",
+      "category": "men",
+      "price": "456789",
+      "description": "dfghjkl",
+      "sizes": [],
+      "brand": "fghjk",
+      "image": "dfghjkl",
+      "stock": "12",
+      "trending": false,
+      "quantity": ""
+    },
+    {
+      "id": "237d",
+      "name": "dfghjk",
+      "category": "kids",
+      "price": "12345678",
+      "description": "sdftgyhujik",
+      "sizes": [],
+      "brand": "dxcfvghbjnk",
+      "image": "edfghjkl",
+      "stock": "12345",
+      "trending": false,
+      "quantity": ""
     }
   ]
 }

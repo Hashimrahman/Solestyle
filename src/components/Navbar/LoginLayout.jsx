@@ -8,10 +8,10 @@ import Swal from "sweetalert2";
 // import { useNavigate } from "react-router-dom";
 
 const LoginLayout = ({ open, openSet }) => {
-  //   const navigate = useNavigate();
   const navigate = useNavigate();
   const { users, handleLogout } = useContext(ProductContext);
   const [currentUser, setCurrentUser] = useState(null);
+  const [cartLength, setCartLength] = useState(0);
   const id = localStorage.getItem("id");
 
   useEffect(() => {
@@ -20,17 +20,12 @@ const LoginLayout = ({ open, openSet }) => {
       setCurrentUser(user);
     }
   }, [users, id]);
+  useEffect(()=>{
+    const cartLength = currentUser?.cart?.length || 0;
+    setCartLength(cartLength); 
 
-  // const openDetails = (user) =>{
-  //   Swal.fire({
-  //     position: "top-end",
-  //     Title: `${user.name}`,
-  //     showConfirmButton: false,
-  //     customClass: {
-  //       popup: 'swal-margin'  // Assign a custom class to the popup
-  //     }
-  //   });
-  // }
+  },[currentUser])
+  // const cartLength = currentUser.cart.length();
   const openDetails = (user, handleLogout) => {
     Swal.fire({
       position: "top-end",
@@ -39,6 +34,7 @@ const LoginLayout = ({ open, openSet }) => {
       html: `<div class="swal-div">
       <h1 class='swal-name'>${user.fullName}</h1>
       <p >${user.email}</p>
+       <button id="orders" class="swal2-confirm swal-button">Orders</button>
        <button id="logoutButton" class="swal2-confirm swal-button">Logout</button>
       </div>`, // Add a logout button
       customClass: {
@@ -48,6 +44,10 @@ const LoginLayout = ({ open, openSet }) => {
       didRender: () => {
         // Attach a click event listener to the logout button
         const logoutButton = document.getElementById("logoutButton");
+        const order = document.getElementById("orders");
+        order.addEventListener("click", () => {
+          navigate('/orders'), Swal.close();
+        });
         logoutButton.addEventListener("click", () => {
           handleLogout(), Swal.close();
         });
@@ -64,7 +64,10 @@ const LoginLayout = ({ open, openSet }) => {
           className="text-3xl text-primary hover:bg-secondary rounded-full p-2"
           onClick={() => navigate("/cart")}
         >
+          <div className="relative h-full">
           <MdOutlineShoppingCart />
+          <p className="absolute -top-4 -right-5 text-base bg-red-500 px-2 rounded-full">{cartLength}</p>
+          </div>
         </button>
         <div>
           {currentUser ? (
