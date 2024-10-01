@@ -27,18 +27,20 @@ const LogOutLayout = ({ open, openSet }) => {
         </div>
       </div>
       <div className="inline-block md:hidden text-3xl font-extrabold text-primary">
-        <button
-          onClick={() => openSet(!open)}
-          style={{ display: open ? "none" : "inline-block" }}
-        >
-          <MdMenu />
-        </button>
-        <button
-          onClick={() => openSet(!open)}
-          style={{ display: open ? "inline-block" : "none" }}
-        >
-          <IoClose />
-        </button>
+        <div>
+          <button
+            onClick={() => openSet(!open)}
+            style={{ display: open ? "none" : "inline-block" }}
+          >
+            <MdMenu />
+          </button>
+          <button
+            onClick={() => openSet(!open)}
+            style={{ display: open ? "inline-block" : "none" }}
+          >
+            <IoClose />
+          </button>
+        </div>
       </div>
     </div>
   );

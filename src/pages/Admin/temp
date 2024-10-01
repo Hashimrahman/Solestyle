@@ -83,3 +83,542 @@
               </div>
             )}
           </div>
+
+
+
+
+
+
+          [
+  {
+    "id": "1",
+    "name": "Air Zoom Pegasus 39",
+    "category": "Men",
+    "price": "9998",
+    "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Nike",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
+    "stock": "2",
+    "trending": true,
+    "quantity": 2
+  },
+  {
+    "id": "2",
+    "name": "UltraBoost 22",
+    "category": "Women",
+    "price": "14998",
+    "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "Adidas",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+    "stock": "150",
+    "trending": true,
+    "quantity": 2
+  },
+  {
+    "id": "3",
+    "name": "Classic Slip-On",
+    "category": "Men",
+    "price": 4980,
+    "description": "Classic Vans slip-on sneakers, perfect for casual wear with a timeless look and comfortable fit.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "Vans",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
+    "stock": 40,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "4",
+    "name": "Chuck Taylor All Star",
+    "category": "Women",
+    "price": 4565,
+    "description": "Iconic high-top sneakers with a canvas upper, rubber sole, and the unmistakable Converse star logo.",
+    "sizes": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "Converse",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/d/o/6-wk-100-woakers-white-original-imaghzaytne8cf22.jpeg?q=70",
+    "stock": 30,
+    "trending": false,
+    "quantity": 4
+  },
+  {
+    "id": "5",
+    "name": "Kid's Flex Runner",
+    "category": "Kids",
+    "price": 4150,
+    "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+    "sizes": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "brand": "Nike",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+    "stock": 20,
+    "trending": true,
+    "quantity": 4
+  },
+  {
+    "id": "6",
+    "name": "Yeezy Boost 350 V2",
+    "category": "Men",
+    "price": 18260,
+    "description": "The popular Yeezy Boost 350 V2 combines street style with comfort, featuring Primeknit upper and Boost sole.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Adidas",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/f/h/7-boost-7-density-black-green-original-imagstzff5hqwgqx.jpeg?q=70",
+    "stock": 10,
+    "trending": true,
+    "quantity": 2
+  },
+  {
+    "id": "7",
+    "name": "Gel-Kayano 27",
+    "category": "Women",
+    "price": 13280,
+    "description": "Stability running shoes with Gel cushioning for support and comfort on long-distance runs.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "brand": "Asics",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/v/e/-original-imah4a64wat6vsse.jpeg?q=70",
+    "stock": 18,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "8",
+    "name": "Kid's Superstar",
+    "category": "Kids",
+    "price": 5810,
+    "description": "Classic Adidas Superstar sneakers for kids, with a durable shell toe and the signature three stripes.",
+    "sizes": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "brand": "Adidas",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/m/t/5/7c-unisex-kids-knitted-led-light-shoes-blink-2-for-1-4-yrs-boys-original-imahf7x6ytzsgy3v.jpeg?q=70",
+    "stock": 25,
+    "trending": false,
+    "quantity": 2
+  },
+  {
+    "id": "9",
+    "name": "Jordan 1 Retro High",
+    "category": "Men",
+    "price": 14110,
+    "description": "Iconic basketball shoes featuring premium leather and Air cushioning for comfort and style.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Jordan",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/5/o/-original-imagzjw3cyd9gf9f.jpeg?q=70",
+    "stock": 12,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "10",
+    "name": "Puma RS-X3",
+    "category": "Men",
+    "price": 9140,
+    "description": "Chunky, bold sneakers with retro-inspired design and lightweight cushioning for all-day wear.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Puma",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/d/d/q/-original-imah4ehyqbhzmvzs.jpeg?q=70",
+    "stock": 22,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "11",
+    "name": "Nike React Infinity Run",
+    "category": "Women",
+    "price": 13280,
+    "description": "Running shoes designed to reduce injury, with React foam cushioning for a smooth and stable ride.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "Nike",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/f/4/-original-imah4j6u7f2cq7tb.jpeg?q=70",
+    "stock": 16,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "12",
+    "name": "Vans Sk8-Hi",
+    "category": "Men",
+    "price": 5810,
+    "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Vans",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
+    "stock": 35,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "13",
+    "name": "Adidas NMD_R1",
+    "category": "Women",
+    "price": "1099",
+    "description": "Streetwear sneakers featuring Boost cushioning and a sleek, minimalist design for everyday wear.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "brand": "Adidas",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/x/b/o/7-ef2104-original-imagzzgyhfp3ycxq.jpeg?q=70",
+    "stock": 20,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "14",
+    "name": "Nike Air Max 270",
+    "category": "Men",
+    "price": 11620,
+    "description": "Sporty sneakers with a large Air unit in the heel for maximum cushioning and comfort.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "Nike",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/g/e/t/6-cw7290-001-original-imagp5zgf2hkzt9d.jpeg?q=70",
+    "stock": 28,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "15",
+    "name": "Reebok Nano X1",
+    "category": "Women",
+    "price": 10780,
+    "description": "Versatile training shoes designed for stability and comfort during workouts and daily activities.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "brand": "Reebok",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/m/v/e/5-rez-c1t370-2-black-original-imagzddj4ngfjwzj.jpeg?q=70",
+    "stock": 19,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "16",
+    "name": "Under Armour HOVR Phantom",
+    "category": "Men",
+    "price": 13310,
+    "description": "High-performance training shoes with UA HOVR cushioning for energy return and a snug fit.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Under Armour",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/b/5/q/7-3025984-001-original-imagtr8vyd4xhzud.jpeg?q=70",
+    "stock": 10,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "17",
+    "name": "On Cloudstratus",
+    "category": "Women",
+    "price": 15460,
+    "description": "High-performance running shoes featuring dual-layer cushioning and a breathable upper for optimal comfort.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "On",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/a/2/b/7-0000000000-original-imagpyc4mvtqjzhu.jpeg?q=70",
+    "stock": 15,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "18",
+    "name": "Nike Free RN 5.0",
+    "category": "Men",
+    "price": 7490,
+    "description": "Lightweight, flexible running shoes designed for a natural feel and comfort during runs.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Nike",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/5/r/6-cd5436-006-original-imagpfdzztfhzuyb.jpeg?q=70",
+    "stock": 24,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "19",
+    "name": "Adidas Swift Run",
+    "category": "Women",
+    "price": 6640,
+    "description": "Casual running shoes with a lightweight design, perfect for daily wear and workouts.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "brand": "Adidas",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/c/y/e/6-gz2471-original-imagpzhw9sybqkt.jpeg?q=70",
+    "stock": 20,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "20",
+    "name": "Hoka One One Bondi 7",
+    "category": "Men",
+    "price": 15460,
+    "description": "Max cushioned running shoes designed for comfort and support during long runs.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "Hoka One One",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/8/n/s/7-110.17680-original-imagzgh7eyvh9c7z.jpeg?q=70",
+    "stock": 15,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "21",
+    "name": "Nike Air Max 90",
+    "category": "Men",
+    "price": 12440,
+    "description": "Classic sneakers with timeless style and comfort, featuring visible Air cushioning.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "brand": "Nike",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/y/4/y/8-dv1352-100-original-imagpft9yt3ckzqx.jpeg?q=70",
+    "stock": 18,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "22",
+    "name": "Adidas Samba",
+    "category": "Men",
+    "price": 9990,
+    "description": "Classic soccer-inspired sneakers with a soft leather upper and gum rubber outsole.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "Adidas",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/t/q/j/-original-imah4a6hfrfrkccz.jpeg?q=70",
+    "stock": 22,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "23",
+    "name": "New Balance 990v5",
+    "category": "Men",
+    "price": 13280,
+    "description": "Premium running shoes with a classic design, offering exceptional comfort and support.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "New Balance",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/c/z/-original-imah4a66fdwtvggb.jpeg?q=70",
+    "stock": 10,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "24",
+    "name": "Asics Gel-Kayano Lite",
+    "category": "Women",
+    "price": 11620,
+    "description": "Lightweight stability running shoes offering excellent cushioning and support.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "Asics",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/c/g/f/5-1011b380-400-original-imagzkhfkh5zfxbv.jpeg?q=70",
+    "stock": 16,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "25",
+    "name": "Reebok Classic Leather",
+    "category": "Women",
+    "price": 8310,
+    "description": "Timeless sneakers made from premium leather for style and comfort.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "Reebok",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/q/b/x/10-ef3076-original-imagzhmzqhp4aaf.jpeg?q=70",
+    "stock": 20,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "26",
+    "name": "Puma Suede Classic",
+    "category": "Men",
+    "price": 8310,
+    "description": "Classic low-top sneakers made from suede for a stylish look and comfortable fit.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "Puma",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/d/x/z/10-381128-01-original-imaghqtcyxg4bgys.jpeg?q=70",
+    "stock": 12,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "27",
+    "name": "Hoka One One Clifton 7",
+    "category": "Women",
+    "price": 14110,
+    "description": "Lightweight running shoes with maximum cushioning for a smooth ride on any surface.",
+    "sizes": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "brand": "Hoka One One",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/x/e/h/12-1110510-tczb-original-imagzshg7ykhsyxu.jpeg?q=70",
+    "stock": 15,
+    "trending": true,
+    "quantity": 1
+  },
+  {
+    "id": "28",
+    "name": "On Cloudsurfer",
+    "category": "Men",
+    "price": 16630,
+    "description": "Cloud-like cushioning and a lightweight design for a comfortable running experience.",
+    "sizes": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "brand": "On",
+    "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/r/u/7-10000001-original-imag4q2qypcfbgjq.jpeg?q=70",
+    "stock": 10,
+    "trending": false,
+    "quantity": 1
+  },
+  {
+    "id": "29",
+    "name": "New shoe",
+    "category": "Men",
+    "price": "9999",
+    "description": "newshoe testing",
+    "brand": "nike",
+    "image": "sdfhj",
+    "stock": "12",
+    "trending": true,
+    "quantity": 1
+  }
+]

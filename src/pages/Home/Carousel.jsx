@@ -1,16 +1,13 @@
 // Carousel.jsx
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import carousel1 from "../../assets/carousel/carousel1.png";
 import carousel2 from "../../assets/carousel/carousel2.png";
+import { useNavigate } from "react-router-dom";
 
-const images = [
-  carousel1,
-  carousel2,
-  carousel1,
-  
-];
+const images = [carousel1, carousel2, carousel1];
 
 const Carousel = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto slide every 3 seconds
@@ -45,8 +42,8 @@ const Carousel = () => {
             className="w-screen h-full object-fill"
           />
         ))}
-        
       </div>
+
       <div className="absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={goToPreviousSlide}
@@ -62,7 +59,16 @@ const Carousel = () => {
           &#10095;
         </button>
       </div>
-      
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-4">
+        <button
+          className="px-4 py-2 md:px-20 md:py-4 text-primary bg-secondary/70 rounded-md md:text-lg z-50"
+          onClick={() => {
+            navigate("/shop");
+          }}
+        >
+          Shop Now
+        </button>
+      </div>
     </div>
   );
 };

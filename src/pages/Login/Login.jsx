@@ -5,7 +5,9 @@ import axios from "axios";
 import { ProductContext } from "../../components/Context/Product";
 
 const Login = () => {
-  const { isLoggedIn, setIsLoggedIn,users, handleLogin } = useContext(ProductContext);
+  const { isLoggedIn, setIsLoggedIn, users, handleLogin } = useContext(
+    ProductContext
+  );
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -37,6 +39,140 @@ const Login = () => {
   //   localStorage.removeItem("isLoggedIn");
   // };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let isValid = true;
+  //   let validationErrors = {};
+
+  //   // Validation logic
+  //   if (formData.email.trim() === "" || formData.email === null) {
+  //     isValid = false;
+  //     validationErrors.email = "Email Required";
+  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  //     isValid = false;
+  //     validationErrors.email = "Email Not Valid";
+  //   }
+
+  //   if (formData.password.trim() === "" || formData.password === null) {
+  //     isValid = false;
+  //     validationErrors.password = "Password Required";
+  //   } else if (formData.password.length < 6) {
+  //     isValid = false;
+  //     validationErrors.password = "Password Should be at least 6 characters";
+  //   }
+
+  //   if (!isValid) {
+  //     setError(validationErrors);
+  //     setValid(false);
+  //     return; // Exit if validation fails
+  //   }
+
+  //   // Axios call to check user credentials
+  //   axios
+  //     .get("http://localhost:8000/users")
+  //     .then((res) => {
+  //       const user = res.data.find((user) => user.email === formData.email);
+  //       if (!user) {
+  //         validationErrors.email = "Email not found";
+  //         setError(validationErrors);
+  //         setValid(false);
+  //       } else if (user.password === formData.password) {
+  //         alert("Login Successful");
+  //         // localStorage.setItem("id",user.id);
+  //         handleLogin(user.id);
+  //         axios
+  //           .patch(`http://localhost:8000/users/${user.id}`, {
+  //             isLoggedIn: true,
+  //           })
+  //           .then(() => {
+  //             console.log("User login status updated to true");
+  //             navigate("/");
+  //           })
+  //           .catch((err) => {
+  //             console.log("Error updating login status:", err);
+  //             alert("Failed to update login status");
+  //           });
+  //         navigate("/");
+  //         localStorage.setItem("id",user.id);
+  //         localStorage.setItem("name",user.fullName);
+  //         localStorage.setItem("email",user.email);
+  //       } else {
+  //         validationErrors.password = "Wrong Password";
+  //         setError(validationErrors);
+  //         setValid(false);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert("An Unexpected error occurred");
+  //     });
+
+  //   setError(validationErrors);
+  //   setValid(isValid);
+  // };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let isValid = true;
+  //   let validationErrors = {};
+
+  //   // Validation logic
+  //   if (formData.email.trim() === "" || formData.email === null) {
+  //     isValid = false;
+  //     validationErrors.email = "Email Required";
+  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  //     isValid = false;
+  //     validationErrors.email = "Email Not Valid";
+  //   }
+
+  //   if (formData.password.trim() === "" || formData.password === null) {
+  //     isValid = false;
+  //     validationErrors.password = "Password Required";
+  //   } else if (formData.password.length < 6) {
+  //     isValid = false;
+  //     validationErrors.password = "Password Should be at least 6 characters";
+  //   }
+
+  //   if (!isValid) {
+  //     setError(validationErrors);
+  //     setValid(false);
+  //     return; // Exit if validation fails
+  //   }
+
+  //   // Use the 'users' from the context for the login check
+  //   const user = users.find((user) => user.email === formData.email);
+
+  //   if (!user) {
+  //     validationErrors.email = "Email not found";
+  //     setError(validationErrors);
+  //     setValid(false);
+  //   } else if (user.password === formData.password) {
+  //     alert("Login Successful");
+  //     handleLogin(user.id); // Call handleLogin from context
+
+  //     // Update user's login status
+  //     axios
+  //       .patch(`http://localhost:8000/users/${user.id}`, {
+  //         isLoggedIn: true,
+  //       })
+  //       .then(() => {
+  //         console.log("User login status updated to true");
+  //         navigate("/");
+  //       })
+  //       .catch((err) => {
+  //         console.log("Error updating login status:", err);
+  //         alert("Failed to update login status");
+  //       });
+
+  //     // Store user info in localStorage
+  //     localStorage.setItem("id", user.id);
+  //     localStorage.setItem("name", user.fullName);
+  //     localStorage.setItem("email", user.email);
+  //   } else {
+  //     validationErrors.password = "Wrong Password";
+  //     setError(validationErrors);
+  //     setValid(false);
+  //   }
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     let isValid = true;
@@ -65,48 +201,69 @@ const Login = () => {
       return; // Exit if validation fails
     }
 
-    // Axios call to check user credentials
-    axios
-      .get("http://localhost:8000/users")
-      .then((res) => {
-        const user = res.data.find((user) => user.email === formData.email);
-        if (!user) {
-          validationErrors.email = "Email not found";
-          setError(validationErrors);
-          setValid(false);
-        } else if (user.password === formData.password) {
-          alert("Login Successful");
-          // localStorage.setItem("id",user.id);
-          handleLogin(user.id);
-          axios
-            .patch(`http://localhost:8000/users/${user.id}`, {
-              isLoggedIn: true,
-            })
-            .then(() => {
-              console.log("User login status updated to true");
-              navigate("/");
-            })
-            .catch((err) => {
-              console.log("Error updating login status:", err);
-              alert("Failed to update login status");
-            });
-          navigate("/");
-          localStorage.setItem("id",user.id);
-          localStorage.setItem("name",user.fullName);
-          localStorage.setItem("email",user.email);
-        } else {
-          validationErrors.password = "Wrong Password";
-          setError(validationErrors);
-          setValid(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("An Unexpected error occurred");
-      });
+    // Use the 'users' from the context for the login check
+    const user = users.find((user) => user.email === formData.email);
 
-    setError(validationErrors);
-    setValid(isValid);
+    if (!user) {
+      validationErrors.email = "Email not found";
+      setError(validationErrors);
+      setValid(false);
+    } else if (user.password === formData.password) {
+      alert("Login Successful");
+      handleLogin(user.id); // Call handleLogin from context
+
+      // Update user's login status
+      axios
+        .patch(`http://localhost:8000/users/${user.id}`, {
+          isLoggedIn: true,
+        })
+        .then(() => {
+          console.log("User login status updated to true");
+
+          // Check if the user is an admin and navigate accordingly
+          // if (user.isAdmin) {
+          //   navigate("/admin", { replace: true });
+          //   window.history.pushState(null, null, window.location.href);
+          //   window.addEventListener("popstate", function (event) {
+          //     window.history.pushState(null, null, window.location.href);
+          //   });
+          // }
+          if (user.isAdmin) {
+            // Navigate to the admin dashboard and prevent back navigation
+            navigate('/admin', { replace: true });
+          
+            // Prevent back navigation for admin
+            // window.history.pushState(null, null, window.location.href);
+            // window.addEventListener('popstate', function (event) {
+            //   window.history.pushState(null, null, window.location.href);
+            // });
+            
+            // // Remove ability to navigate to the main page when clicking back multiple times
+            // const preventBack = () => {
+            //   window.history.pushState(null, null, window.location.href);
+            // };
+          
+            // // Continuously prevent back navigation by listening to popstate
+            // window.addEventListener('popstate', preventBack);
+          }
+           else {
+            navigate("/"); // Navigate to home page for regular users
+          }
+        })
+        .catch((err) => {
+          console.log("Error updating login status:", err);
+          alert("Failed to update login status");
+        });
+
+      // Store user info in localStorage
+      localStorage.setItem("id", user.id);
+      localStorage.setItem("name", user.fullName);
+      localStorage.setItem("email", user.email);
+    } else {
+      validationErrors.password = "Wrong Password";
+      setError(validationErrors);
+      setValid(false);
+    }
   };
 
   return (

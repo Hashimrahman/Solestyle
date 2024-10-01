@@ -78,7 +78,7 @@ const Orders = () => {
                     ))}
                   </ul>
                   {/* Display the total price for the current order */}
-                  <h1 className="font-semibold mt-4">Total Price: ${orderTotal.toFixed(2)}</h1>
+                  <h1 className="font-semibold mt-4">Total Price: ${orderTotal.to(2)}</h1>
                 </div>
               </div>
             );

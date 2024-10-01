@@ -1,18 +1,26 @@
 {
   "users": [
     {
+      "id": "1",
+      "fullName": "Admin",
+      "email": "admin@gmail.com",
+      "password": "Admin123",
+      "isAdmin": true,
+      "isLoggedIn": true
+    },
+    {
       "id": "c131c541-a2b8-4294-a88d-f9ea91a7cc19",
       "fullName": "Hashim Rahman",
       "email": "hashimrahmanrh@gmail.com",
       "password": "121212",
       "confirmPassword": "121212",
-      "isLoggedIn": true,
+      "isLoggedIn": false,
       "cart": [
         {
           "id": "2",
           "name": "UltraBoost 22",
           "category": "Women",
-          "price": 14940,
+          "price": "14998",
           "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
           "sizes": [
             6,
@@ -22,9 +30,65 @@
           ],
           "brand": "Adidas",
           "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
-          "stock": 15,
+          "stock": "150",
           "trending": true,
           "quantity": 2
+        },
+        {
+          "id": "3",
+          "name": "Classic Slip-On",
+          "category": "Men",
+          "price": 4980,
+          "description": "Classic Vans slip-on sneakers, perfect for casual wear with a timeless look and comfortable fit.",
+          "sizes": [
+            8,
+            9,
+            10,
+            11
+          ],
+          "brand": "Vans",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
+          "stock": 40,
+          "trending": false,
+          "quantity": 1
+        },
+        {
+          "id": "4",
+          "name": "Chuck Taylor All Star",
+          "category": "Women",
+          "price": 4565,
+          "description": "Iconic high-top sneakers with a canvas upper, rubber sole, and the unmistakable Converse star logo.",
+          "sizes": [
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "brand": "Converse",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/d/o/6-wk-100-woakers-white-original-imaghzaytne8cf22.jpeg?q=70",
+          "stock": 30,
+          "trending": false,
+          "quantity": "1"
+        },
+        {
+          "id": "5",
+          "name": "Kid's Flex Runner",
+          "category": "Kids",
+          "price": 4150,
+          "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+          "sizes": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "brand": "Nike",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+          "stock": 20,
+          "trending": true,
+          "quantity": 1
         }
       ],
       "address": {
@@ -132,8 +196,34 @@
           ],
           "orderDate": "2024-09-24T05:42:18.129Z",
           "status": "Paid"
+        },
+        {
+          "orderId": "2024-09-28T10:13:52.561Z",
+          "products": [
+            {
+              "id": "2",
+              "name": "UltraBoost 22",
+              "category": "Women",
+              "price": 14940,
+              "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+              "sizes": [
+                6,
+                7,
+                8,
+                9
+              ],
+              "brand": "Adidas",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+              "stock": 15,
+              "trending": true,
+              "quantity": 2
+            }
+          ],
+          "orderDate": "2024-09-28T10:13:52.561Z",
+          "status": "Paid"
         }
-      ]
+      ],
+      "isblocked": false
     },
     {
       "id": "b83f04ad-359e-492a-9a73-b19b4e6d2b99",
@@ -144,59 +234,11 @@
       "isLoggedIn": true,
       "cart": [
         {
-          "id": "5",
-          "name": "Kid's Flex Runner",
-          "category": "Kids",
-          "price": 4150,
-          "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
-          "sizes": [
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
-          "brand": "Nike",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
-          "stock": 20,
-          "trending": true,
-          "quantity": 7
-        }
-      ]
-    },
-    {
-      "id": "5889bced-8d40-43e5-86f6-83198bd2a9b9",
-      "fullName": "dev",
-      "email": "dev@bridgeon.in",
-      "password": "dev@123",
-      "confirmPassword": "dev@123",
-      "isLoggedIn": true,
-      "cart": [
-        {
-          "id": "4",
-          "name": "Chuck Taylor All Star",
-          "category": "Women",
-          "price": 4565,
-          "description": "Iconic high-top sneakers with a canvas upper, rubber sole, and the unmistakable Converse star logo.",
-          "sizes": [
-            5,
-            6,
-            7,
-            8,
-            9
-          ],
-          "brand": "Converse",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/d/o/6-wk-100-woakers-white-original-imaghzaytne8cf22.jpeg?q=70",
-          "stock": 30,
-          "trending": false,
-          "quantity": 4
-        },
-        {
-          "id": "1",
-          "name": "Air Zoom Pegasus 39",
+          "id": "6",
+          "name": "Yeezy Boost 350 V2",
           "category": "Men",
-          "price": 9960,
-          "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
+          "price": 18260,
+          "description": "The popular Yeezy Boost 350 V2 combines street style with comfort, featuring Primeknit upper and Boost sole.",
           "sizes": [
             8,
             9,
@@ -204,50 +246,93 @@
             11,
             12
           ],
-          "brand": "Nike",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
-          "stock": 25,
+          "brand": "Adidas",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/f/h/7-boost-7-density-black-green-original-imagstzff5hqwgqx.jpeg?q=70",
+          "stock": 10,
           "trending": true,
-          "quantity": 2
-        },
-        {
-          "id": "11",
-          "name": "Nike React Infinity Run",
-          "category": "Women",
-          "price": 13280,
-          "description": "Running shoes designed to reduce injury, with React foam cushioning for a smooth and stable ride.",
-          "sizes": [
-            6,
-            7,
-            8,
-            9
-          ],
-          "brand": "Nike",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/f/4/-original-imah4j6u7f2cq7tb.jpeg?q=70",
-          "stock": 16,
-          "trending": true,
-          "quantity": 1
-        },
-        {
-          "id": "12",
-          "name": "Vans Sk8-Hi",
-          "category": "Men",
-          "price": 5810,
-          "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
-          "sizes": [
-            8,
-            9,
-            10,
-            11,
-            12
-          ],
-          "brand": "Vans",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
-          "stock": 35,
-          "trending": false,
           "quantity": 1
         }
-      ]
+      ],
+      "orders": [
+        {
+          "orderId": "2024-09-26T09:26:31.336Z",
+          "products": [
+            {
+              "id": "5",
+              "name": "Kid's Flex Runner",
+              "category": "Kids",
+              "price": 4150,
+              "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+              "sizes": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "brand": "Nike",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+              "stock": 20,
+              "trending": true,
+              "quantity": 7
+            }
+          ],
+          "orderDate": "2024-09-26T09:26:31.336Z",
+          "status": "Paid"
+        },
+        {
+          "orderId": "2024-09-26T10:26:00.110Z",
+          "products": [
+            {
+              "id": "1",
+              "name": "Air Zoom Pegasus 39",
+              "category": "Men",
+              "price": 9960,
+              "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
+              "sizes": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "brand": "Nike",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
+              "stock": 25,
+              "trending": true,
+              "quantity": 2
+            }
+          ],
+          "orderDate": "2024-09-26T10:26:00.110Z",
+          "status": "Paid"
+        },
+        {
+          "orderId": "2024-09-26T10:50:19.044Z",
+          "products": [
+            {
+              "id": "2",
+              "name": "UltraBoost 22",
+              "category": "Women",
+              "price": 14940,
+              "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+              "sizes": [
+                6,
+                7,
+                8,
+                9
+              ],
+              "brand": "Adidas",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+              "stock": 15,
+              "trending": true,
+              "quantity": 2
+            }
+          ],
+          "orderDate": "2024-09-26T10:50:19.044Z",
+          "status": "Paid"
+        }
+      ],
+      "isblocked": true
     }
   ],
   "categories": [
@@ -281,7 +366,7 @@
       "id": "1",
       "name": "Air Zoom Pegasus 39",
       "category": "Men",
-      "price": 9960,
+      "price": "9998",
       "description": "Lightweight running shoes with responsive cushioning, designed for speed and comfort during long runs.",
       "sizes": [
         8,
@@ -292,15 +377,15 @@
       ],
       "brand": "Nike",
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/k/l/l/-original-imagpfdvjxzzspsm.jpeg?q=70",
-      "stock": 25,
+      "stock": "20",
       "trending": true,
-      "quantity": 2
+      "quantity": 1
     },
     {
       "id": "2",
       "name": "UltraBoost 22",
       "category": "Women",
-      "price": 14940,
+      "price": "14998",
       "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
       "sizes": [
         6,
@@ -310,9 +395,9 @@
       ],
       "brand": "Adidas",
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
-      "stock": 15,
+      "stock": "150",
       "trending": true,
-      "quantity": 2
+      "quantity": 1
     },
     {
       "id": "3",
@@ -349,7 +434,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/d/o/6-wk-100-woakers-white-original-imaghzaytne8cf22.jpeg?q=70",
       "stock": 30,
       "trending": false,
-      "quantity": 4
+      "quantity": "1"
     },
     {
       "id": "5",
@@ -368,7 +453,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
       "stock": 20,
       "trending": true,
-      "quantity": 4
+      "quantity": 1
     },
     {
       "id": "6",
@@ -387,7 +472,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/f/h/7-boost-7-density-black-green-original-imagstzff5hqwgqx.jpeg?q=70",
       "stock": 10,
       "trending": true,
-      "quantity": 2
+      "quantity": 1
     },
     {
       "id": "7",
@@ -425,7 +510,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/m/t/5/7c-unisex-kids-knitted-led-light-shoes-blink-2-for-1-4-yrs-boys-original-imahf7x6ytzsgy3v.jpeg?q=70",
       "stock": 25,
       "trending": false,
-      "quantity": 2
+      "quantity": 1
     },
     {
       "id": "9",
@@ -506,7 +591,7 @@
       "id": "13",
       "name": "Adidas NMD_R1",
       "category": "Women",
-      "price": 11620,
+      "price": "1099",
       "description": "Streetwear sneakers featuring Boost cushioning and a sleek, minimalist design for everyday wear.",
       "sizes": [
         6,
@@ -516,7 +601,7 @@
         10
       ],
       "brand": "Adidas",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/x/b/o/7-ef2104-original-imagzzgyhfp3ycxq.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/j/w/7/-original-imagsbx4qfuuhz8g.jpeg?q=70",
       "stock": 20,
       "trending": true,
       "quantity": 1
@@ -534,7 +619,7 @@
         11
       ],
       "brand": "Nike",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/g/e/t/6-cw7290-001-original-imagp5zgf2hkzt9d.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/j/t/g/10-ah8050-028-10-nike-anthracite-photo-blue-black-white-original-imagyxsukhvfjqn7.jpeg?q=70",
       "stock": 28,
       "trending": true,
       "quantity": 1
@@ -553,7 +638,7 @@
         10
       ],
       "brand": "Reebok",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/m/v/e/5-rez-c1t370-2-black-original-imagzddj4ngfjwzj.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/c/n/g/4-rwsora1824-4-reebok-black-original-imahyzf4anb3pbhd.jpeg?q=70",
       "stock": 19,
       "trending": false,
       "quantity": 1
@@ -572,7 +657,7 @@
         12
       ],
       "brand": "Under Armour",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/b/5/q/7-3025984-001-original-imagtr8vyd4xhzud.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/b/o/7-5-3027566-001-7-5-under-armour-black-white-original-imagz6qjt3wqtpv4.jpeg?q=70",
       "stock": 10,
       "trending": true,
       "quantity": 1
@@ -590,7 +675,7 @@
         9
       ],
       "brand": "On",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/a/2/b/7-0000000000-original-imagpyc4mvtqjzhu.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/o/c/w/10-39-99007-10-5-on-running-fossil-midnight-original-imagrvdfux8uebmj.jpeg?q=70",
       "stock": 15,
       "trending": false,
       "quantity": 1
@@ -609,7 +694,7 @@
         12
       ],
       "brand": "Nike",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/5/r/6-cd5436-006-original-imagpfdzztfhzuyb.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/x/7/m/10-5-dv3949-003-10-5-nike-smoke-grey-smoke-grey-iron-grey-black-original-imahfhvssphkcnrq.jpeg?q=70",
       "stock": 24,
       "trending": false,
       "quantity": 1
@@ -628,7 +713,7 @@
         10
       ],
       "brand": "Adidas",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/c/y/e/6-gz2471-original-imagpzhw9sybqkt.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/6/f/1/9-ig4704-9-adidas-cblack-cblack-gum3-original-imagvcqxa5gcgdkn.jpeg?q=70",
       "stock": 20,
       "trending": true,
       "quantity": 1
@@ -646,7 +731,7 @@
         11
       ],
       "brand": "Hoka One One",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/8/n/s/7-110.17680-original-imagzgh7eyvh9c7z.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/g/z/q/-original-imaggcb4geny5bz5.jpeg?q=70",
       "stock": 15,
       "trending": false,
       "quantity": 1
@@ -665,7 +750,7 @@
         12
       ],
       "brand": "Nike",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/y/4/y/8-dv1352-100-original-imagpft9yt3ckzqx.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/x/q/9/-original-imagx8guwj6szj4r.jpeg?q=70",
       "stock": 18,
       "trending": true,
       "quantity": 1
@@ -683,7 +768,7 @@
         11
       ],
       "brand": "Adidas",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/t/q/j/-original-imah4a6hfrfrkccz.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/q/g/n/-original-imah4zhgh9wdkwv9.jpeg?q=70",
       "stock": 22,
       "trending": false,
       "quantity": 1
@@ -701,7 +786,7 @@
         11
       ],
       "brand": "New Balance",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/c/z/-original-imah4a66fdwtvggb.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/2/j/j/7-mroavfb2-7-5-new-balance-black-original-imagz6xm4gbe2qs8.jpeg?q=70",
       "stock": 10,
       "trending": true,
       "quantity": 1
@@ -719,7 +804,7 @@
         9
       ],
       "brand": "Asics",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/c/g/f/5-1011b380-400-original-imagzkhfkh5zfxbv.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/v/m/h/-original-imah4zhe8wjamkvy.jpeg?q=70",
       "stock": 16,
       "trending": false,
       "quantity": 1
@@ -737,7 +822,7 @@
         9
       ],
       "brand": "Reebok",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/q/b/x/10-ef3076-original-imagzhmzqhp4aaf.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/f/i/-original-imagwzzy24sjdh3g.jpeg?q=70",
       "stock": 20,
       "trending": true,
       "quantity": 1
@@ -755,7 +840,7 @@
         11
       ],
       "brand": "Puma",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/d/x/z/10-381128-01-original-imaghqtcyxg4bgys.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/m/t/9/-original-imagz3ucsbtgbtex.jpeg?q=70",
       "stock": 12,
       "trending": false,
       "quantity": 1
@@ -773,7 +858,7 @@
         9
       ],
       "brand": "Hoka One One",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/x/e/h/12-1110510-tczb-original-imagzshg7ykhsyxu.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/knj7wcw0/shoe/h/c/g/8-m7-22509-greyt-blue-m7-by-metronaut-greyt-blue-original-imag26tr2zyn5mqa.jpeg?q=70",
       "stock": 15,
       "trending": true,
       "quantity": 1
@@ -791,36 +876,22 @@
         11
       ],
       "brand": "On",
-      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/z/r/u/7-10000001-original-imag4q2qypcfbgjq.jpeg?q=70",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/i/l/m/7-8216472-7-bata-jet-black-original-imah45txqduudyts.jpeg?q=70",
       "stock": 10,
       "trending": false,
       "quantity": 1
     },
     {
-      "id": "8d29",
-      "name": "hjhiuhu",
-      "category": "men",
-      "price": "456789",
-      "description": "dfghjkl",
-      "sizes": [],
-      "brand": "fghjk",
-      "image": "dfghjkl",
+      "id": "29",
+      "name": "New shoe",
+      "category": "Men",
+      "price": "4997",
+      "description": "newshoe testing",
+      "brand": "nike",
+      "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/j/u/b/6-rso389-6-red-tape-grey-original-imah35z5xp7cagat.jpeg?q=70",
       "stock": "12",
-      "trending": false,
-      "quantity": ""
-    },
-    {
-      "id": "237d",
-      "name": "dfghjk",
-      "category": "kids",
-      "price": "12345678",
-      "description": "sdftgyhujik",
-      "sizes": [],
-      "brand": "dxcfvghbjnk",
-      "image": "edfghjkl",
-      "stock": "12345",
-      "trending": false,
-      "quantity": ""
+      "trending": true,
+      "quantity": 1
     }
   ]
 }

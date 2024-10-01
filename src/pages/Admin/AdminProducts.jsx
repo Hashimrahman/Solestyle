@@ -1,34 +1,44 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../components/Context/Product";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Products = () => {
-  // Sample product data
   const { products } = useContext(ProductContext);
+  const navigate = useNavigate();
 
-  // const [activeTab, setActiveTab] = useState("dashboard");
-  const [productsList, setProductsList] = useState(products);
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [productsList, setProductsList] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState("");
   const [newProduct, setNewProduct] = useState({
     name: "",
     category: "",
     price: "",
     description: "",
-    sizes: [],
+    // sizes: [],
     brand: "",
     image: "",
     stock: "",
-    trending: false,
-    quantity: "",
+    trending: true,
+    quantity: 1,
   });
+  useEffect(() => {
+    if (products && products.length > 0) {
+      setProductsList(products);
+      setFilteredProducts(products); // This will display all products initially
+    }
+  }, [products]);
 
   const handleDrpodown = (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
+
     if (selectedCategory === "all") {
       setFilteredProducts(productsList);
     } else {
       const filtered = productsList.filter(
-        (item) => item.category.toLowerCase() === selectedCategory.toLowerCase()
+        (item) =>
+          item.category.toLowerCase().trim() ===
+          selectedCategory.toLowerCase().trim()
       );
       setFilteredProducts(filtered);
     }
@@ -42,66 +52,36 @@ const Products = () => {
     }));
   };
 
-  // const handleAddProduct = (e) => {
-  //   e.preventDefault();
-  //   setProductsList((prev) => [
-  //     ...prev,
-  //     { ...newProduct, id: `${prev.length + 1}` },
-  //   ]);
-  //   setNewProduct({
-  //     name: "",
-  //     category: "",
-  //     price: "",
-  //     description: "",
-  //     sizes: [],
-  //     brand: "",
-  //     image: "",
-  //     stock: "",
-  //     trending: false,
-  //     quantity: "",
-  //   });
-  //   console.log("Product Added:", newProduct);
-  //   alert("item added")
-  // };
   const handleAddProduct = async (e) => {
-    e.preventDefault(); // Prevent the page from reloading
+    e.preventDefault();
   
-    // Basic validation
     if (!newProduct.name || !newProduct.price || !newProduct.category) {
       alert("Please fill in all required fields");
       return;
     }
-
-    setNewProduct({ ...newProduct, id: `${products.length + 1}` })
   
-    // Send a POST request to the server to add the new product
+    // Set the ID for the new product
+    const newProductWithId = { ...newProduct, id: `${productsList.length + 1}` };
+  
     try {
-      const response = await fetch("http://localhost:8000/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newProduct),
-      });
+      const response = await axios.post("http://localhost:8000/products", newProductWithId);
+      const addedProduct = response.data;
   
-      if (!response.ok) {
-        throw new Error("Failed to add product");
-      }
+      // Update the products list immediately in state
+      setProductsList((prevProductsList) => [...prevProductsList, addedProduct]);
+      setFilteredProducts((prevFilteredProducts) => [...prevFilteredProducts, addedProduct]);
   
-      const addedProduct = await response.json();
-  
-      // Update the local product list (optional)
-      setProductsList((prev) => [...prev, addedProduct]);
-  
-      // Reset the form fields after a successful submission
+      // Reset the form after successful addition
       setNewProduct({
         name: "",
         price: "",
+        category: "",
         description: "",
         brand: "",
-        category: "",
         image: "",
         stock: "",
+        trending: true,
+        quantity: 1,
       });
   
       console.log("Product successfully added:", addedProduct);
@@ -111,6 +91,22 @@ const Products = () => {
   };
   
 
+  const handleDelete = (id) => {
+    // Remove the product from the state immediately
+    const updatedProducts = filteredProducts.filter((item) => item.id !== id);
+    setFilteredProducts(updatedProducts);
+    setProductsList(updatedProducts);
+  
+    // Then make the delete request to the server
+    axios.delete(`http://localhost:8000/products/${id}`)
+      .then((response) => {
+        console.log('Product deleted successfully', response);
+      })
+      .catch((error) => {
+        console.error('Error deleting the product:', error);
+      });
+  };
+  
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Main Content */}
@@ -118,8 +114,8 @@ const Products = () => {
         <div>
           <h2 className="text-2xl font-bold mb-6">Products</h2>
           {/* Category Dropdown */}
-          <div className="mb-4">
-            <label className="block mb-2">Select Category:</label>
+          <label className="block mb-2">Select Category:</label>
+          <div className="mb-4 flex gap-4">
             <select
               className="border border-gray-300 rounded p-2"
               name="category"
@@ -132,6 +128,11 @@ const Products = () => {
               <option value="Women">Women</option>
               <option value="Kids">Kids</option>
             </select>
+            <input
+              type="text"
+              placeholder="Search Products"
+              className="px-4 w-full border border-gray-300"
+            />
           </div>
 
           <div className="mb-4">
@@ -192,6 +193,32 @@ const Products = () => {
                 onChange={handleInputChange}
                 className="border border-gray-300 rounded p-2 mb-2 w-full"
               />
+              <div className="flex items-center mb-2 gap-2">
+                <h1>Trending</h1>
+                <input
+                  type="radio"
+                  id="trendingYes"
+                  name="trending"
+                  className="scale-125"
+                  value={true}
+                  checked={newProduct.trending === true}
+                  onChange={() =>
+                    setNewProduct({ ...newProduct, trending: true })
+                  }
+                />
+                <label htmlFor="trendingNo">Yes</label>
+                <input
+                  type="radio"
+                  name="trending"
+                  className="scale-125"
+                  value={false}
+                  checked={newProduct.trending === false}
+                  onChange={() =>
+                    setNewProduct({ ...newProduct, trending: false })
+                  }
+                />
+                <label htmlFor="">No</label>
+              </div>
               <button
                 type="submit"
                 className="bg-blue-500 text-white rounded p-2"
@@ -233,10 +260,16 @@ const Products = () => {
                       {product.stock}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
-                      <button className="text-blue-500 hover:underline">
+                      <button
+                        className="text-blue-500 hover:underline"
+                        onClick={() => navigate(`/product/edit/${product.id}`)}
+                      >
                         Edit
                       </button>
-                      <button className="text-red-500 hover:underline ml-2">
+                      <button
+                        className="text-red-500 hover:underline ml-2"
+                        onClick={() => handleDelete(product.id)}
+                      >
                         Delete
                       </button>
                     </td>

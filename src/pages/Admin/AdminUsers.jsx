@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ProductContext } from "../../components/Context/Product";
+import { Link } from "react-router-dom";
 
 const AdminUsers = () => {
   const { users } = useContext(ProductContext);
@@ -19,26 +20,27 @@ const AdminUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users
+              .filter((item) => item.fullName != "Admin")
+              .map((user) => (
                 <tr key={user.id}>
-                    <td className="border border-gray-300 px-4 py-2">
-                        {user.id}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                        {user.fullName}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                        {user.email}
-                    </td>
-                    <td className="border border-gray-300 px-4 py-2">
-                        {user.id}
-                    </td>
-                    <td>
-                        Block
-                    </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.id}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.fullName}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.email}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {user.orders ? user.orders.length : 0}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    <Link to={`/user/${user.id}`}> View More</Link>
+                  </td>
                 </tr>
-            ))
-            }
+              ))}
           </tbody>
         </table>
       </div>

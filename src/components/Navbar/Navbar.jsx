@@ -22,7 +22,7 @@ const Navbar = () => {
   const [cartLength, setCartLength] = useState(0);
 
   const id = localStorage.getItem("id");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = users.find((item) => item.id === id);
@@ -30,26 +30,33 @@ const Navbar = () => {
       setCurrentUser(user);
     }
   }, [users, id]);
-  useEffect(()=>{
+  useEffect(() => {
     const cartLength = currentUser?.cart?.length || 0;
-    setCartLength(cartLength); 
-  },[currentUser])
+    setCartLength(cartLength);
+  }, [currentUser]);
 
   const openDetails = (user, handleLogout) => {
     Swal.fire({
       position: "top-end",
+      // text: 'hi',
       showConfirmButton: false,
       html: `<div class="swal-div">
-        <h1 class='swal-name'>${user.fullName}</h1>
-        <p >${user.email}</p>
-         <button id="logoutButton" class="swal2-confirm swal-button">Logout</button>
-      </div>`,
+      <h1 class='swal-name'>${user.fullName}</h1>
+      <p >${user.email}</p>
+       <button id="orders" class="swal2-confirm swal-button">Orders</button>
+       <button id="logoutButton" class="swal2-confirm swal-button">Logout</button>
+      </div>`, // Add a logout button
       customClass: {
         popup: "swal-margin",
         title: "swal-title",
       },
       didRender: () => {
+        // Attach a click event listener to the logout button
         const logoutButton = document.getElementById("logoutButton");
+        const order = document.getElementById("orders");
+        order.addEventListener("click", () => {
+          navigate('/orders'), Swal.close();
+        });
         logoutButton.addEventListener("click", () => {
           handleLogout(), Swal.close();
         });
@@ -61,7 +68,7 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 w-full m-0 p-4 backdrop-blur z-20 border-none outline-none">
         <div className="flex justify-between items-center mx-4 ">
-          <div className=" w-[12em]">
+          <div className="w-[6em] md:w-[12em]">
             <img src={SoleStyle} alt="" />
           </div>
           <div className="hidden md:inline-block">
@@ -91,17 +98,24 @@ const Navbar = () => {
           {id ? (
             <div className="flex flex-row-reverse gap-4 flex-wrap ">
               <LoginLayout open={open} openSet={setOpen} />
-              <button
-                className="flex h-full text-3xl justify-center items-center md:hidden"
-                onClick={() => openDetails(currentUser, handleLogout)}
-              >
-                <FaCircleUser />
-              </button>
-              <div className="md:hidden">
-                <button className="relative h-full text-3xl" onClick={() => navigate("/cart")}>
-                  <MdOutlineShoppingCart />
-                  <p className="absolute -top-4 -right-5 text-base bg-red-500 px-2 rounded-full">{cartLength}</p>
+              <div className="flex flex-row-reverse gap-6 ">
+                <button
+                  className="flex h-full text-3xl justify-center items-center md:hidden"
+                  onClick={() => openDetails(currentUser, handleLogout)}
+                >
+                  <FaCircleUser />
                 </button>
+                <div className="md:hidden">
+                  <button
+                    className=" relative h-full text-3xl"
+                    onClick={() => navigate("/cart")}
+                  >
+                    <MdOutlineShoppingCart />
+                    <p className="absolute -top-4 -right-5 text-base bg-red-500 px-2 rounded-full">
+                      {cartLength}
+                    </p>
+                  </button>
+                </div>
               </div>
             </div>
           ) : (

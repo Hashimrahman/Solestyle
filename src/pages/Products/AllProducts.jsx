@@ -7,17 +7,20 @@ const AllProducts = () => {
   const navigate = useNavigate();
   const { products } = useContext(ProductContext);
   const [isLoading, setIsLoading] = useState(true);
+
   const [search, setSearch] = useState("");
-  const [searchProducts, setSearchProducts] = useState(products);
-  const [categorizedProduct, setCategorizedProduct] = useState(products);
+  const [searchProducts, setSearchProducts] = useState([]);
+  const [categorizedProduct, setCategorizedProduct] = useState([]);
+
   const [men, setMen] = useState([]);
   const [women, setWomen] = useState([]);
   const [kids, setKids] = useState([]);
+
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     const loadData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       setIsLoading(false);
     };
 
@@ -25,19 +28,24 @@ const AllProducts = () => {
   }, []);
 
   useEffect(() => {
-    const FilteredMen = products.filter(
-      (product) => product.category === "Men"
-    );
-    setMen(FilteredMen);
-    const FilteredWomen = products.filter(
-      (product) => product.category === "Women"
-    );
-    setWomen(FilteredWomen);
-    const FilteredKids = products.filter(
-      (product) => product.category === "Kids"
-    );
-    setKids(FilteredKids);
+    if (products.length > 0) {
+      setCategorizedProduct(products);
+      setSearchProducts(products);
+      const FilteredMen = products.filter(
+        (product) => product.category === "Men"
+      );
+      setMen(FilteredMen);
+      const FilteredWomen = products.filter(
+        (product) => product.category === "Women"
+      );
+      setWomen(FilteredWomen);
+      const FilteredKids = products.filter(
+        (product) => product.category === "Kids"
+      );
+      setKids(FilteredKids);
+    }
   }, [products]);
+
   const handleCategory = (category, productList) => {
     setActiveCategory(category);
     setCategorizedProduct(productList);
@@ -68,6 +76,9 @@ const AllProducts = () => {
           </div>
         </div>
       </div>
+      // <div className="w-full h-screen flex justify-center items-center">
+      //   <div className="loader"></div>
+      // </div>
     );
   }
 

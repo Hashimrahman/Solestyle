@@ -24,6 +24,8 @@ const Payment = () => {
     cvv: "",
   };
 
+  // ===========================================================================================================================
+
   const handlePaymentSubmit = async (values, { setSubmitting }) => {
     console.log("Payment Data Submitted:", values);
     try {
@@ -76,6 +78,8 @@ const Payment = () => {
     }
     setSubmitting(false);
   };
+
+  // ====================================================================================================================================
 
   return (
     <div className="flex justify-center items-center min-h-screen">

@@ -6,16 +6,16 @@ export const NavbarMenu = [
         trending : false
     },
     {
+        id: 3,
+        title: 'Shop',
+        link: '/shop',
+        trending : false
+    },
+    {
         id: 2,
         title: 'Trending',
         link: '/trending',
         trending : true
-    },
-    {
-        id: 3,
-        title: 'About Us',
-        link: '/about-us',
-        trending : false
     },
     {
         id: 4,

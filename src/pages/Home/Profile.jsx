@@ -66,11 +66,17 @@ const ProfilePage = () => {
             </button>
             <button
               onClick={() => handleSectionClick("profile")}
-              className={`w-full py-2 px-4 text-left rounded ${
+              className={`w-full py-2 px-4 mb-4 text-left rounded ${
                 activeSection === "profile" ? "bg-blue-400 text-white" : "bg-gray-200"
               }`}
             >
               Profile Details
+            </button>
+            <button
+              onClick={() => navigate('/')}
+              className={`w-full py-2 px-4 text-left rounded bg-gray-200`}
+            >
+              Go to Home
             </button>
           </div>
         </div>

@@ -86,7 +86,7 @@ const Cart = () => {
       .catch((err) => {
         console.log("Error in removing item", err);
       });
-    window.location.reload();
+    // window.location.reload();
   };
 
   const totalPrice = cart.reduce(

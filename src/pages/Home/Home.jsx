@@ -1,7 +1,6 @@
-import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import Featured from "../Products/Featured";
 import Carousel from "./Carousel";
-import Category from "./Category";
 import './Home.css'
 
 const Home = () => {
@@ -11,8 +10,8 @@ const Home = () => {
       <div className="overflow-hidden mt-20 md:mt-0 transition-all ease-in-out duration-500">
         <Carousel /> 
       </div>
-      <Category />
-      <Footer />
+      <Featured />
+      {/* <Footer /> */}
     </>
   );
 };

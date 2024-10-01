@@ -18,6 +18,10 @@ import Payment from "./pages/CheckOut/Payment";
 import Orders from "./pages/CheckOut/Orders";
 import AdminPage from "./pages/Admin/Admin";
 import ProfilePage from "./pages/Home/Profile";
+import UserDetailedView from "./pages/Admin/UserDetailedView";
+import EditProductForm from "./pages/Admin/ProductEditing";
+import AboutUs from "./pages/About/AboutUs";
+import Featured from "./pages/Products/Featured";
 // import { ContextProvider } from "./components/Context/Context";
 
 function App() {
@@ -34,6 +38,8 @@ function App() {
             <Route path="women" element={<Women />} />
             <Route path="kids" element={<Kids />} />
             <Route path="cart" element={<Cart />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="trending" element={<Featured />} />
           </Route>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -43,7 +49,9 @@ function App() {
           <Route path="/payment" element={<Payment />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/user/:id" element={<UserDetailedView />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/product/edit/:id" element={<EditProductForm />} />
         </Routes>
         {/* <Route path="/submit" element={<CheckOut />}></Route> */}
       </ProductProvider>
