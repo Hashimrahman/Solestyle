@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaUserCircle } from "react-icons/fa";
+import Orders from "../CheckOut/Orders";
 
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState("orders");
@@ -12,7 +13,9 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/users/${userId}`);
+        const response = await axios.get(
+          `http://localhost:8000/users/${userId}`
+        );
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -51,7 +54,9 @@ const ProfilePage = () => {
             <button
               onClick={() => handleSectionClick("orders")}
               className={`w-full py-2 px-4 mb-4 text-left rounded ${
-                activeSection === "orders" ? "bg-blue-400 text-white" : "bg-gray-200"
+                activeSection === "orders"
+                  ? "bg-blue-400 text-white"
+                  : "bg-gray-200"
               }`}
             >
               Orders
@@ -59,7 +64,9 @@ const ProfilePage = () => {
             <button
               onClick={() => handleSectionClick("address")}
               className={`w-full py-2 px-4 mb-4 text-left rounded ${
-                activeSection === "address" ? "bg-blue-400 text-white" : "bg-gray-200"
+                activeSection === "address"
+                  ? "bg-blue-400 text-white"
+                  : "bg-gray-200"
               }`}
             >
               Address
@@ -67,13 +74,15 @@ const ProfilePage = () => {
             <button
               onClick={() => handleSectionClick("profile")}
               className={`w-full py-2 px-4 mb-4 text-left rounded ${
-                activeSection === "profile" ? "bg-blue-400 text-white" : "bg-gray-200"
+                activeSection === "profile"
+                  ? "bg-blue-400 text-white"
+                  : "bg-gray-200"
               }`}
             >
               Profile Details
             </button>
             <button
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
               className={`w-full py-2 px-4 text-left rounded bg-gray-200`}
             >
               Go to Home
@@ -87,25 +96,7 @@ const ProfilePage = () => {
         {activeSection === "orders" && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Your Orders</h2>
-            {userData.orders && userData.orders.length > 0 ? (
-              userData.orders.map((order) => (
-                <div key={order.orderId} className="bg-white p-4 rounded-lg mb-4 shadow">
-                  <h3 className="text-lg font-semibold">Order ID: {order.orderId}</h3>
-                  <p>Order Date: {new Date(order.orderDate).toLocaleDateString()}</p>
-                  <p>Status: {order.status}</p>
-                  <h4 className="font-semibold mt-2">Products:</h4>
-                  <ul className="list-disc list-inside">
-                    {order.products.map((product) => (
-                      <li key={product.id}>
-                        {product.name} - ${product.price} x {product.quantity}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            ) : (
-              <p>No orders found.</p>
-            )}
+            <Orders />
           </div>
         )}
 
@@ -124,7 +115,8 @@ const ProfilePage = () => {
                   <strong>Phone: </strong> {userData.address.phone}
                 </p>
                 <p>
-                  <strong>Street Address: </strong> {userData.address.streetAddress}
+                  <strong>Street Address: </strong>{" "}
+                  {userData.address.streetAddress}
                 </p>
                 <p>
                   <strong>City: </strong> {userData.address.city}

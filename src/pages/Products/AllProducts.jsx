@@ -76,9 +76,6 @@ const AllProducts = () => {
           </div>
         </div>
       </div>
-      // <div className="w-full h-screen flex justify-center items-center">
-      //   <div className="loader"></div>
-      // </div>
     );
   }
 

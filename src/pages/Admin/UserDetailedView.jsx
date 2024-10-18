@@ -6,22 +6,12 @@ import axios from "axios";
 
 const UserDetailedView = () => {
   const { id } = useParams();
-  const { users, handleDeleteUser, handleBlockUser } = useContext(ProductContext);
+  const { users, handleDeleteUser,blocked, handleBlockUser } = useContext(ProductContext);
   const navigate = useNavigate();
   if (!users || users.length === 0) {
     return <p>Loading user data...</p>; // Add a fallback for when data is loading
   }
   const user = users.find((item) => item.id == id);
-  // const handleDeleteUser = (id)=>{
-  //   axios.delete(`http://localhost:8000/users/${id}`)
-  //   .then((res) =>{
-  //     console.log("User deleted succesfully",res.data);
-  //   })
-  //   .catch((err) =>{
-  //     console.log("An error occured",err);
-  //   })
-  //   navigate('/admin');
-  // }
 
 
   if (!user) {
@@ -130,9 +120,9 @@ const UserDetailedView = () => {
       </div>
       <div className="w-full flex justify-center bg-slate-100 rounded-md mt-4 py-4">
           <div className="w-2/3 flex justify-between flex-wrap">
-            <button className="w-full m-2 md:w-1/4 px-10 py-2 bg-[#d97706] rounded-md" onClick={() => {handleBlockUser(id)}}>Block</button>
+            <button className="w-full m-2 md:w-1/4 px-10 py-2 bg-[#d97706] rounded-md" onClick={() => {handleBlockUser(id)}}>{blocked === true ? "Unblock" : "Block"}</button>
             <button className="w-full m-2 md:w-1/4 px-10 py-2 bg-[#dc2626] rounded-md" onClick={() =>{handleDeleteUser(id)}}>Delete</button>
-            <button className="w-full m-2 md:w-1/4 px-10 py-2 bg-[#6b7280] rounded-md">Go back</button>
+            <button className="w-full m-2 md:w-1/4 px-10 py-2 bg-[#6b7280] rounded-md" onClick={() => navigate('/admin')}>Go back</button>
           </div>
         </div>
     </div>

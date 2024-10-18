@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { ProductContext } from "../Context/Product";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 // import { FaCircleUser } from "react-icons/fa6";
 
 const NavMobile = ({ open }) => {
@@ -20,11 +21,37 @@ const NavMobile = ({ open }) => {
       setCurrentUser(user);
     }
   }, [users, id]);
+  // const logoutFunction = () => {
+  //   axios.patch(`http://localhost:8000/users/${currentUser.id}`, {
+  //     isLoggedIn: false,
+  //   });
+  //   handleLogout();
+  // };
   const logoutFunction = () => {
-    axios.patch(`http://localhost:8000/users/${currentUser.id}`, {
-      isLoggedIn: false,
-    });
-    handleLogout();
+    axios
+      .patch(`http://localhost:8000/users/${currentUser.id}`, {
+        isLoggedIn: false,
+      })
+      .then(() => {
+        // Show SweetAlert after logout patch is successful
+        Swal.fire({
+          icon: "success",
+          title: "Logout Successful",
+          text: "You have been logged out successfully.",
+          timer: 1000, // 1 second delay
+          showConfirmButton: false,
+        }).then(() => {
+          handleLogout(); // Call handleLogout after alert
+        });
+      })
+      .catch((error) => {
+        console.log("Error during logout:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred while logging out. Please try again.",
+        });
+      });
   };
   return (
     <>

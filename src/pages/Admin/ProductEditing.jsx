@@ -33,20 +33,6 @@ const EditProductForm = () => {
     }
   };
 
-// const handleSubmit = async (e) => {
-//     e.preventDefault();
-  
-//     try {
-//       // Assuming `currentProduct.id` is the correct identifier for the product
-//       const response = await axios.patch(`http://localhost:8000/products/${currentProduct.id}`, currentProduct);
-      
-//       console.log('Updated Product:', response.data);
-//       // Navigate to the admin page after a successful update
-//       navigate('/admin');
-//     } catch (error) {
-//       console.error('Error updating product:', error);
-//       // Optionally, you could show an error message to the user here
-//     }}
 
   // Show loading or form based on state
   if (loading) {

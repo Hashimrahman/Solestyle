@@ -17,7 +17,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { users, handleLogout } = useContext(ProductContext);
+  const { users, handleLogout, cart } = useContext(ProductContext);
   const [currentUser, setCurrentUser] = useState(null);
   const [cartLength, setCartLength] = useState(0);
 
@@ -31,9 +31,9 @@ const Navbar = () => {
     }
   }, [users, id]);
   useEffect(() => {
-    const cartLength = currentUser?.cart?.length || 0;
+    const cartLength = cart?.length || 0;
     setCartLength(cartLength);
-  }, [currentUser]);
+  }, [cart]);
 
   const openDetails = (user, handleLogout) => {
     Swal.fire({

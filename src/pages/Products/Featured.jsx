@@ -58,6 +58,14 @@ const Featured = () => {
               </div>
             ))}
         </div>
+        <div className="md:my-4 p-6">
+          <button
+            className="bg-blue-500 px-4 py-2 rounded-md w-full md:w-1/3 hover:scale-105 transition-all ease-in-out duration-500"
+            onClick={() => navigate("/shop")}
+          >
+            Explore More
+          </button>
+        </div>
       </div>
       <Footer />
     </>
