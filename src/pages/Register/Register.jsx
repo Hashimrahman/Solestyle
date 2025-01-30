@@ -7,15 +7,20 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { useContext } from "react";
 import { ProductContext } from "../../components/Context/Product";
+// import api from "../Login/api";  
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // Validation schema using Yup
 const RegisterSchema = Yup.object().shape({
-  fullName: Yup.string().required("Full Name is required"),
+  username: Yup.string().required("user Name is required"),
+  first_name: Yup.string().required("First Name is required"),
+  last_name: Yup.string().required("Last Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
+  mobile_number: Yup.string().required("Mobile Number is required"),
   password: Yup.string()
     .min(6, "Password should be at least 6 characters")
     .required("Password is required"),
-  confirmPassword: Yup.string()
+  password2: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Please confirm your password"),
 });
@@ -27,39 +32,33 @@ const Register = () => {
   // Handles form submission and validation.
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      // Check if email already exists
-      const response = await axios.get("http://localhost:8000/users");
-      const user = response.data.find((user) => user.email === values.email);
+      const response = await axios.post(`${apiUrl}/register/`, values);
+      const user = response.data;
 
-      if (user) {
-        setErrors({ email: "Email Already Exists" });
-        setSubmitting(false);
-        return;
-      }
-
-      // Create new id for each user
-      const newUser = { ...values, id: uuidv4(), isLoggedIn: false };
-
-      await axios.post("http://localhost:8000/users", newUser); // Post user details to JSON server
-      const updateUser = [...users, newUser];
-      setUsers(updateUser);
-
-      // Show success message with SweetAlert2
       Swal.fire({
         title: "Registration Successful!",
         text: "Redirecting to login page...",
         icon: "success",
-        timer: 1000, // Timer set to 1000ms
-        showConfirmButton: false, // Hides the confirmation button
+        timer: 1000, 
+        showConfirmButton: false, 
         willClose: () => {
-          navigate("/login"); // Navigate to login after SweetAlert closes
-        }
+          navigate("/login"); 
+        },
       });
-
+      console.log(user);
     } catch (error) {
-      console.log("Error during registration:", error);
-      alert("An error occurred. Please try again later.");
-      setSubmitting(false);
+      if (error.response && error.response.data) {
+        const backendErrors = error.response.data;
+        const formattedErrors = {};
+        console.log("new", backendErrors);
+
+        // Map the backend errors to Formik field errors
+        Object.keys(backendErrors).forEach((key) => {
+          formattedErrors[key] = backendErrors[key];
+        });
+
+        setErrors(formattedErrors); 
+      }
     }
   };
 
@@ -67,10 +66,13 @@ const Register = () => {
     <div className="h-[100vh] p-4 sm:p-20 flex items-center">
       <Formik
         initialValues={{
-          fullName: "",
+          username: "",
+          first_name: "",
+          last_name: "",
           email: "",
+          mobile_number: "",
           password: "",
-          confirmPassword: "",
+          password2: "",
         }}
         validationSchema={RegisterSchema}
         onSubmit={handleSubmit}
@@ -87,42 +89,105 @@ const Register = () => {
               <div className="w-full lg:w-1/2">
                 <div className="flex flex-col w-full gap-2 mt-4">
                   <label
-                    htmlFor="fullName"
+                    htmlFor="username"
                     className="text-lg font-bold opacity-70"
                   >
-                    Full Name
+                    User Name
                   </label>
                   <Field
-                    type="text"
-                    name="fullName"
-                    placeholder="Enter Your Full Name"
+                    type="username"
+                    name="username"
+                    placeholder="Enter Your username"
                     className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
                   />
                   <ErrorMessage
-                    name="fullName"
+                    name="username"
                     component="span"
                     className="text-red-600"
                   />
                 </div>
-                <div className="flex flex-col w-full gap-2 mt-4">
-                  <label
-                    htmlFor="email"
-                    className="text-lg font-bold opacity-70"
-                  >
-                    Email
-                  </label>
-                  <Field
-                    type="email"
-                    name="email"
-                    placeholder="Enter Your Email"
-                    className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="span"
-                    className="text-red-600"
-                  />
+                <div className="md:flex gap-4">
+                  <div className="flex flex-col w-full gap-2 mt-4">
+                    <label
+                      htmlFor="first_name"
+                      className="text-lg font-bold opacity-70"
+                    >
+                      First Name
+                    </label>
+                    <Field
+                      type="text"
+                      name="first_name"
+                      placeholder="Enter Your Full Name"
+                      className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
+                    />
+                    <ErrorMessage
+                      name="first_name"
+                      component="span"
+                      className="text-red-600"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-2 mt-4">
+                    <label
+                      htmlFor="lastName"
+                      className="text-lg font-bold opacity-70"
+                    >
+                      Last Name
+                    </label>
+                    <Field
+                      type="text"
+                      name="last_name"
+                      placeholder="Enter Your Full Name"
+                      className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
+                    />
+                    <ErrorMessage
+                      name="last_name"
+                      component="span"
+                      className="text-red-600"
+                    />
+                  </div>
                 </div>
+
+                <div className="md:flex gap-4">
+                  <div className="flex flex-col w-full gap-2 mt-4">
+                    <label
+                      htmlFor="email"
+                      className="text-lg font-bold opacity-70"
+                    >
+                      Email
+                    </label>
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Enter Your Email"
+                      className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="span"
+                      className="text-red-600"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-2 mt-4">
+                    <label
+                      htmlFor="mobile_number"
+                      className="text-lg font-bold opacity-70"
+                    >
+                      Phone
+                    </label>
+                    <Field
+                      type="text"
+                      name="mobile_number"
+                      placeholder="Enter Your Phone Number"
+                      className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
+                    />
+                    <ErrorMessage
+                      name="mobile_number"
+                      component="span"
+                      className="text-red-600"
+                    />
+                  </div>
+                </div>
+
                 <div className="flex flex-col w-full gap-2 mt-4">
                   <label
                     htmlFor="password"
@@ -144,19 +209,19 @@ const Register = () => {
                 </div>
                 <div className="flex flex-col w-full gap-2 mt-4">
                   <label
-                    htmlFor="confirmPassword"
+                    htmlFor="password2"
                     className="text-lg font-bold opacity-70"
                   >
                     Confirm Password
                   </label>
                   <Field
                     type="password"
-                    name="confirmPassword"
+                    name="password2"
                     placeholder="Re-Enter Your Password"
                     className="h-10 rounded-3xl p-4 outline-none focus:border-2 focus:border-slate-600 focus:border-solid"
                   />
                   <ErrorMessage
-                    name="confirmPassword"
+                    name="password2"
                     component="span"
                     className="text-red-600"
                   />

@@ -86,7 +86,7 @@ const ProductCard = ({ product, navigate }) => {
 
         <Link to={`/product/${product.id}`}>
           <img
-            src={product.image}
+            src={product.image.replace("https%3A/solestylebucket.s3.ap-south-1.amazonaws.com/", "")}
             alt={product.name}
             className={`w-full h-full object-cover cursor-pointer md:hover:scale-105 transition-all duration-500 ease-in-out transform ${
               isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"

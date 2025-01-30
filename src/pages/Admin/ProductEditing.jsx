@@ -1,40 +1,109 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { ProductContext } from '../../components/Context/Product';
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ProductContext } from "../../components/Context/Product";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const EditProductForm = () => {
   const { id } = useParams();
-  const { products,handleProductUpdate } = useContext(ProductContext);
-
-  const [currentProduct, setCurrentProduct] = useState(null); 
-  const [loading, setLoading] = useState(true); 
+  const { products,setProducts } = useContext(ProductContext);
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token")
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const search = products.find((item) => item.id == id);
-    if (search) {
-      setCurrentProduct(search);
-    } else {
-      console.warn(`Product with id ${id} not found.`);
+    const fetchCurrentProduct = async () => {
+      try {
+        const res = await axios.get(`${apiUrl}/products/${id}/`);
+        setCurrentProduct(res.data);
+      } catch (err) {
+        console.error("Error in fetching product details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCurrentProduct();
+  }, [id]);
+
+  const handleProductUpdate = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData();
+    
+    Object.entries(currentProduct).forEach(([key, value]) => {
+      // if(key === "sizes"){
+      //   console.log("size type",typeof JSON.stringify(value))
+      // }
+      if (key === "image" && value instanceof File) {
+        formData.append(key, value);
+      }
+      else if (key === "sizes") {
+        try {
+          const sizesValue = typeof value == "string" ? JSON.stringify(value.split(",").map(size => size.trim())) : JSON.stringify(currentProduct.sizes.map(size => size));
+          console.log("size to upload",sizesValue);
+          formData.append(key, sizesValue);
+        } catch (error) {
+          console.error("Invalid sizes format:", error);
+        }
+      }
+            
+      else {
+        formData.append(key, value);
+      }
+    });
+  
+    formData.append("trending", currentProduct.trending === "true");
+  
+    try {
+      const response = await axios.put(
+        `${apiUrl}/products/${currentProduct.id}/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      // Update products list after successful update
+      const updatedProducts = products.map((product) =>
+        product.id === currentProduct.id ? response.data : product
+      );
+      setProducts(updatedProducts);
+      console.log("Updated Product:", response.data);
+      navigate("/admin");
+    } catch (error) {
+      console.log("size to upload", currentProduct.sizes)
+      console.error("Error updating product:", error);
     }
-    setLoading(false); // Set loading to false after search
-  }, [products, id]);
+  };
+  
+  
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setCurrentProduct((prevProduct) => ({
       ...prevProduct,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
+
+  const handleFileChange = (e) => {
+    setCurrentProduct((prevProduct) => ({
+      ...prevProduct,
+      image: e.target.files[0],
+    }));
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     if (currentProduct) {
-      handleProductUpdate(e, currentProduct); // Call the update handler with current product
+      handleProductUpdate(e, currentProduct);
     }
   };
 
-
-  // Show loading or form based on state
   if (loading) {
     return <div className="text-center">Loading product details...</div>;
   }
@@ -47,35 +116,35 @@ const EditProductForm = () => {
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Edit Product</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name */}
         <div>
-          <label className="block text-gray-700 font-medium mb-2">Product Name</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Product Name
+          </label>
           <input
             type="text"
             name="name"
             value={currentProduct.name}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter product name"
           />
         </div>
 
-        {/* Category */}
         <div>
-          <label className="block text-gray-700 font-medium mb-2">Category</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Category
+          </label>
           <select
             name="category"
             value={currentProduct.category}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           >
-            <option value="Men">Men</option>
-            <option value="Women">Women</option>
-            <option value="Kids">Kids</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="kids">Kids</option>
           </select>
         </div>
 
-        {/* Price */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Price (₹)</label>
           <input
@@ -84,41 +153,34 @@ const EditProductForm = () => {
             value={currentProduct.price}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter price"
           />
         </div>
 
-        {/* Description */}
         <div>
-          <label className="block text-gray-700 font-medium mb-2">Description</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Description
+          </label>
           <textarea
             name="description"
             value={currentProduct.description}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter product description"
           />
         </div>
 
-        {/* Sizes */}
-        {/* <div>
-          <label className="block text-gray-700 font-medium mb-2">Available Sizes</label>
+        <div>
+          <label className="block text-gray-700 font-medium mb-2">
+            Sizes (e.g., S, M, L)
+          </label>
           <input
             type="text"
             name="sizes"
-            value={currentProduct.sizes.join(', ')}
-            onChange={(e) =>
-              setCurrentProduct((prevProduct) => ({
-                ...prevProduct,
-                sizes: e.target.value.split(',').map(Number),
-              }))
-            } 
+            value={currentProduct.sizes}
+            onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter sizes separated by commas (e.g. 8,9,10)"
           />
-        </div> */}
+        </div>
 
-        {/* Brand */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Brand</label>
           <input
@@ -127,24 +189,19 @@ const EditProductForm = () => {
             value={currentProduct.brand}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter brand name"
           />
         </div>
 
-        {/* Image URL */}
         <div>
-          <label className="block text-gray-700 font-medium mb-2">Image URL</label>
+          <label className="block text-gray-700 font-medium mb-2">Image</label>
           <input
-            type="text"
+            type="file"
             name="image"
-            value={currentProduct.image}
-            onChange={handleInputChange}
+            onChange={handleFileChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter image URL"
           />
         </div>
 
-        {/* Stock */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Stock</label>
           <input
@@ -153,44 +210,37 @@ const EditProductForm = () => {
             value={currentProduct.stock}
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter stock quantity"
           />
         </div>
 
-        {/* Trending */}
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="trending"
-            checked={currentProduct.trending}
-            onChange={handleInputChange}
-            className="mr-2"
-          />
-          <label className="text-gray-700 font-medium">Trending Product</label>
+        <div className="flex items-center gap-4">
+          <label className="text-gray-700 font-medium">Trending:</label>
+          <div className="flex items-center gap-2">
+            <input
+              type="radio"
+              name="trending"
+              value={true}
+              checked={currentProduct.trending === "true"}
+              onChange={handleInputChange}
+            />
+            <label>Yes</label>
+            <input
+              type="radio"
+              name="trending"
+              value={false}
+              checked={currentProduct.trending === "false"}
+              onChange={handleInputChange}
+            />
+            <label>No</label>
+          </div>
         </div>
 
-        {/* Quantity */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Quantity</label>
-          <input
-            type="number"
-            name="quantity"
-            value={currentProduct.quantity}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter quantity"
-          />
-        </div>
-
-        {/* Submit Button */}
-        <div className="text-right">
-          <button
-            type="submit"
-            className="px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition"
-          >
-            Update Product
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+        >
+          Update Product
+        </button>
       </form>
     </div>
   );

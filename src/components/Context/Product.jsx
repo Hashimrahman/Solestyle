@@ -2,8 +2,9 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Toastify from 'toastify-js';
-import "toastify-js/src/toastify.css";  // Don't forget to include the CSS for Toastify
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css"; // Don't forget to include the CSS for Toastify
+const apiUrl2 = import.meta.env.VITE_API_URL;
 
 import "animate.css";
 
@@ -14,43 +15,97 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [productCount, setProductCount] = useState(0);
   const [loadingProducts, setLoadingProducts] = useState(true);
+  const [loadingOrder, setLoadingOrder] = useState(true);
   const [error, setError] = useState(null);
   const [men, setMen] = useState([]);
   const [women, setWomen] = useState([]);
   const [kids, setKids] = useState([]);
   const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
   const [cart, setCart] = useState([]);
+  const [totalCart, setTotalCart] = useState([]);
   const [count, setCount] = useState(0);
   const [cartLength, setCartLength] = useState(0);
+  const [order, setOrder] = useState([]);
+  const [totalOrders, setTotalOrders] = useState([]);
+  const [loadingTotalOrder, setLoadingTotalOrder] = useState(true);
   const [orderStatus, setOrderStatus] = useState("Pending");
   const [blocked, setBlocked] = useState(false);
-  const navigate = useNavigate();
-  const id = localStorage.getItem("id");
 
-  // ===============================================================================================================================
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const navigate = useNavigate();
+  // const id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  // ============================================================ FETCH PRODUCTS ============================================================
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/products");
-        console.log("API Response:", res.data);
+        // const res = await axios.get(`${apiUrl}/products`);
+        const res = await axios.get(`${apiUrl2}/products/`);
+        console.log("API Response product:", res.data);
         setProducts(res.data);
         setProductCount(products.length);
       } catch (err) {
-        console.error("API Error:", err);
+        console.error("API Error product:", err);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [products.length]);
 
-  // ===============================================================================================================================
+  //   const fetchProducts = async () => {
+  // useEffect(() => {
+  //     try {
+  //       const res = await axios.get(`http://127.0.0.1:8000/products/`, {
+  //         params: { page: currentPage },
+  //       });
+  //       console.log("API Response product:", res.data.results);
+  //       setProducts(res.data.results);
+  //       setTotalPages(Math.ceil(res.data.count / 10));
+  //     } catch (err) {
+  //       console.error("API Error product:", err);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, [currentPage]);
+
+  // ============================================================ FETCH CURRENT USER ============================================================
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      if (token) {
+        try {
+          const res = await axios(`${apiUrl2}/user-details/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          setCurrentUser(res.data);
+        } catch (err) {
+          console.error("Error in fetching user", err);
+        }
+      }
+    };
+    fetchCurrentUser();
+  }, [token]);
+
+  // ============================================================ FETCH USER ============================================================
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/users");
-        console.log("API Response:", res.data);
+        const res = await axios.get(`${apiUrl2}/users/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("API Response:users", res.data);
         setUsers(res.data);
       } catch (err) {
         console.error("API Error:", err);
@@ -58,31 +113,60 @@ export const ProductProvider = ({ children }) => {
     };
 
     fetchUsers();
-  }, []);
+  }, [token]);
 
-  // ===============================================================================================================================
+  // ============================================================ FETCH ORDER ============================================================
 
-  // const handleDeleteUser = (id) => {
-  //   axios
-  //     .delete(`http://localhost:8000/users/${id}`)
-  //     .then((res) => {
-  //       console.log("User deleted succesfully", res);
-  //       const deletedUserData = res.data;
-  //       const updatedUsers = users.filter(
-  //         (item) => item.id != deletedUserData.id
-  //       );
-  //       setUsers(updatedUsers);
-  //     })
-  //     .catch((err) => {
-  //       console.log("An error occured", err);
-  //     });
-  //   navigate("/admin");
-  // };
+  const fetchOrder = async () => {
+    try {
+      const res = await axios.get(`${apiUrl2}/order/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("orders", res.data);
+      console.log("orders address", res.data);
+      if (res.data) {
+        setOrder(res.data);
+      }
+
+      setLoadingOrder(false);
+    } catch (err) {
+      console.error("Error in fetching orders", err);
+      setLoadingOrder(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrder();
+  }, [token]);
+
+  // ============================================================ FETCH ALL ORDER ============================================================
+
+  useEffect(() => {
+    const fetchAllOrder = async () => {
+      try {
+        console.log("Orders");
+        const res = await axios.get(`${apiUrl2}/total-orders/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("Total Orders:", res.data);
+        setTotalOrders(res.data);
+        setLoadingTotalOrder(false);
+      } catch (err) {
+        console.error("Error fetching Orders", err);
+      }
+    };
+    fetchAllOrder();
+  }, [token]);
 
   // ===============================================================================================================================
 
   useEffect(() => {
-    let FilteredMen = products.filter((product) => product.category == "Men");
+    console.log("jkk", products);
+    let FilteredMen = products.filter((product) => product.category == "men");
     setMen(FilteredMen);
     let FilteredWomen = products.filter(
       (product) => product.category == "Women"
@@ -92,126 +176,123 @@ export const ProductProvider = ({ children }) => {
     setKids(FilteredKids);
   }, [products]);
 
-  // ===============================================================================================================================
-
-  const handleLogin = (userId) => {
-    setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", true);
-    localStorage.setItem("isBlocked", false);
-    loadCart(userId);
-  };
-
-  // ===============================================================================================================================
-
-  const handleLogout = () => {
-    const loggedInUserId = localStorage.getItem("id");
-    if (loggedInUserId) {
-      localStorage.removeItem(`cart_${loggedInUserId}`);
-    }
-    localStorage.removeItem("id");
-    localStorage.removeItem("name");
-    localStorage.removeItem("email");
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("isBlocked");
-    localStorage.removeItem("activeTab");
-    localStorage.removeItem("checkoutDetails");
-    setCart([]);
-
-    navigate("/");
-  };
-
-  // ===============================================================================================================================
-
-  const loadCart = (userId) => {
-    const savedCart = localStorage.getItem(`cart_${userId}`);
-
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    } else {
-      axios
-        .get(`http://localhost:8000/users/${userId}`)
-        .then((res) => {
-          const userCart = res.data.cart || [];
-          setCart(userCart);
-
-          // Save the cart to localStorage
-          localStorage.setItem(`cart_${userId}`, JSON.stringify(userCart));
-        })
-        .catch((err) => {
-          console.error("Error fetching the user's cart:", err);
-        });
-    }
-  };
-
-  // ===============================================================================================================================
-
-  const saveCart = (userId, updatedCart) => {
-    localStorage.setItem(`cart_${userId}`, JSON.stringify(updatedCart));
-
-    axios
-      .patch(`http://localhost:8000/users/${userId}`, { cart: updatedCart })
-      .then((res) => {
-        console.log("Cart updated successfully:", res.data);
-      })
-      .catch((err) => {
-        console.error("Error updating the cart:", err);
+  // ============================================================ FETCH CART ============================================================
+  
+  const fetchCart = async () => {
+    try {
+      const res = await axios.get(`${apiUrl2}/cart/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log("cart Items row", res.data);
+      console.log("cart Items", res.data[0].cartItems);
+      setCart(res.data[0].cartItems);
+      setCartLength(res.data[0].cartItems.length);
+    } catch (err) {
+      console.error("Error in fetching cart", err);
+    }
   };
 
-  // ===============================================================================================================================
-
-  // Load the cart when the component mounts
   useEffect(() => {
-    const loggedInUserId = localStorage.getItem("id");
-    if (loggedInUserId) {
-      loadCart(loggedInUserId);
+    fetchCart();
+  }, [token]);
+
+  // ============================================================ FETCH CART ============================================================
+  
+  useEffect(()=>{
+    const fetchAllCart = async ()=>{
+      try{
+        const res = await axios.get(`${apiUrl2}/total-cart/`,
+          {
+            headers:{
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        console.log("all cart",res.data);
+        setTotalCart(res.data)
+        
+      }
+      catch(err){
+        console.error("error",err);
+        
+      }
     }
-  }, [navigate]);
+    fetchAllCart()
+  },[])
 
-  const incrementQuantity = (itemId) => {
-    const loggedInUserId = localStorage.getItem("id");
-    const updatedCart = cart.map((item) =>
-      item.id === itemId
-        ? { ...item, quantity: parseInt(item.quantity) + 1 }
-        : item
-    );
-    setCart(updatedCart);
-    saveCart(loggedInUserId, updatedCart);
-  };
+  
+  // ============================================================ INCREASE QUANTITY ============================================================
 
-  // ===============================================================================================================================
-
-  const decrementQuantity = (itemId) => {
-    const loggedInUserId = localStorage.getItem("id");
-    const updatedCart = cart.map((item) =>
-      item.id === itemId && item.quantity > 1
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    );
-    setCart(updatedCart);
-    saveCart(loggedInUserId, updatedCart);
-  };
-
-  // ===============================================================================================================================
-
-  const removeItem = (itemId) => {
-    const loggedInUserId = localStorage.getItem("id");
-    const updatedCart = cart.filter((item) => item.id !== itemId);
-    setCart(updatedCart);
-    saveCart(loggedInUserId, updatedCart);
-    axios
-      .patch(`http://localhost:8000/users/${loggedInUserId}`, {
-        cart: updatedCart,
-      })
-      .then((res) => {
-        console.log("Cart Updated Successfully", res.data);
-      })
-      .catch((err) => {
-        console.log("Error in removing item", err);
+  const incrementQuantity = async (itemId) => {
+    try {
+      const res = await axios.post(
+        `${apiUrl2}/cart/items/${itemId}/increase/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+      fetchCart();
+    } catch (err) {
+      Swal.fire({
+        icon: "fail",
+        title: "Error in increasing quantity",
+        showConfirmButton: true,
+        timer: 1000,
+        timerProgressBar: true,
       });
+      console.log("hii");
+
+      console.error("Error in increasing", err);
+    }
   };
 
-  // ===============================================================================================================================
+  // ============================================================ DECREMENT QUANTITY ============================================================
+
+  const decrementQuantity = async (itemId) => {
+    try {
+      const res = await axios.post(
+        `${apiUrl2}/cart/items/${itemId}/decrease/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+      fetchCart();
+    } catch (err) {
+      console.log("hii");
+      console.error("Error in decreasing", err);
+    }
+  };
+
+  // ============================================================ DELETE CART ITEM ============================================================
+
+  const handleDelete = async (itemId) => {
+    try {
+      const res = await axios.delete(
+        `${apiUrl2}/cart/items/${itemId}/delete/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+      fetchCart();
+    } catch (err) {
+      console.error("Error in deleting", err);
+    }
+  };
+
+  // ============================================================ ADD TO CART ============================================================
 
   // const handleAddToCart = (elem) => {
   //   const loggedInUserId = localStorage.getItem("id");
@@ -236,7 +317,7 @@ export const ProductProvider = ({ children }) => {
   //     let timerInterval;
   //     Swal.fire({
   //       icon: "warning",
-  //       title: `Something Wrong !!\nPlease Contact The Admin`, // New alert message
+  //       title: `Something Wrong !!\nPlease Contact The Admin`,
   //       timer: 2000,
   //       timerProgressBar: true,
   //       willClose: () => {
@@ -278,7 +359,7 @@ export const ProductProvider = ({ children }) => {
   //       const updatedCart = [...cart, elem];
 
   //       axios
-  //         .patch(`http://localhost:8000/users/${loggedInUserId}`, {
+  //         .patch(`${apiUrl}/users/${loggedInUserId}`, {
   //           cart: updatedCart,
   //         })
   //         .then((res) => {
@@ -297,151 +378,91 @@ export const ProductProvider = ({ children }) => {
   //           const cartLength = updatedCart.length;
   //           setCartLength(cartLength);
 
-  //           // alert("Item Added Successfully");
-  //           let timerInterval;
-  //           Swal.fire({
-  //             icon: "success",
-  //             title: `Item Added Successfully`,
-  //             timer: 1000,
-  //             timerProgressBar: true,
-  //             willClose: () => {
-  //               clearInterval(timerInterval);
+  //           Toastify({
+  //             text: "Item Added Successfully",
+  //             duration: 4000, // Increased duration
+  //             close: true,
+  //             gravity: "top", // Position on top
+  //             position: "right", // Align to the right
+  //             backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)", // New gradient
+  //             style: {
+  //               fontSize: "20px", // Bigger text
+  //               width: "350px", // Increase width for visibility
   //             },
-  //           }).then((result) => {
-  //             if (result.dismiss === Swal.DismissReason.timer) {
-  //               console.log("The alert was closed by the timer");
-  //             }
-  //           });
+  //           }).showToast();
   //         })
   //         .catch((err) => {
   //           console.error("Error updating the cart in the database:", err);
   //         });
+
+  //       axios
+  //         .patch(`${apiUrl}/products/${elem.id}`, { quantity: 1 })
+  //         .then((res) => console.log("Success", res.data))
+  //         .catch((err) => {
+  //           console.log("Error", err);
+  //         });
   //     }
   //   }
   // };
-  const handleAddToCart = (elem) => {
-    const loggedInUserId = localStorage.getItem("id");
-    const blockedStatus = localStorage.getItem("isBlocked");
-  
-    if (!loggedInUserId) {
-      let timerInterval;
-      Swal.fire({
-        icon: "warning",
-        title: "Please login",
-        timer: 2000,
-        timerProgressBar: true,
-        willClose: () => {
-          clearInterval(timerInterval);
-        },
-      }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log("The alert was closed by the timer");
-        }
-      });
-    } else if (blockedStatus === "true") {
-      let timerInterval;
-      Swal.fire({
-        icon: "warning",
-        title: `Something Wrong !!\nPlease Contact The Admin`,
-        timer: 2000,
-        timerProgressBar: true,
-        willClose: () => {
-          clearInterval(timerInterval);
-        },
-      }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log("The alert was closed by the timer");
-        }
-      });
-    } else {
-      console.log("User logged in:", loggedInUserId);
-  
-      let isPresent = cart.some((item) => item.id === elem.id);
-  
-      if (isPresent) {
-        let timerInterval;
-        Swal.fire({
-          icon: "warning",
-          title: `Item Already Added`,
-          timer: 1000,
-          timerProgressBar: true,
-          showClass: {
-            popup: "animate__animated animate__fadeIn", // Show animation
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOut", // Hide animation
-          },
-  
-          willClose: () => {
-            clearInterval(timerInterval);
-          },
-        }).then((result) => {
-          if (result.dismiss === Swal.DismissReason.timer) {
-            console.log("The alert was closed by the timer");
-          }
-        });
-      } else {
-        const updatedCart = [...cart, elem];
-  
-        axios
-          .patch(`http://localhost:8000/users/${loggedInUserId}`, {
-            cart: updatedCart,
-          })
-          .then((res) => {
-            console.log("Cart updated in the database:", res.data);
-  
-            // Update cart state
-            setCart(updatedCart);
-  
-            // Save the updated cart in localStorage
-            localStorage.setItem(
-              `cart_${loggedInUserId}`,
-              JSON.stringify(updatedCart)
-            );
-  
-            // Update cart length from the logged-in user's cart
-            const cartLength = updatedCart.length;
-            setCartLength(cartLength);
-  
-            Toastify({
-              text: "Item Added Successfully",
-              duration: 4000, // Increased duration
-              close: true,
-              gravity: "top", // Position on top
-              position: "right", // Align to the right
-              backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)", // New gradient
-              style: {
-                fontSize: "20px", // Bigger text
-                // padding: "20px", // Increase padding for larger size
-                width: "350px",  // Increase width for visibility
-              },
-            }).showToast();
-          })
-          .catch((err) => {
-            console.error("Error updating the cart in the database:", err);
-          });
 
-          axios.patch(`http://localhost:8000/products/${elem.id}`, {quantity:1})
-          .then((res) => console.log('Success', res.data)
-          )
-          .catch((err)=> {
-            console.log("Error", err)
-            
-          })
-      }
+  const handleAddToCart = async (productId, size, count) => {
+    console.log("Adding to cart");
+    try {
+      const res = await axios.post(
+        `${apiUrl2}/cart/add/`,
+        {
+          product: productId,
+          size: size,
+          quantity: count,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("added to cart", res.data);
+      Toastify({
+        text: "Item Added Successfully",
+        duration: 2000,
+        close: true,
+        gravity: "top", 
+        position: "right", 
+        backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)", 
+        style: {
+          fontSize: "20px", 
+          width: "350px", 
+        },
+      }).showToast();
+
+      await fetchCart();
+    } catch (err) {
+      console.error("error in adding to cart", err);
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Add Item",
+        text:
+          "There was an issue adding the item to your cart. Please try again later.",
+        showConfirmButton: true,
+      });
     }
   };
-  
 
-  // ===============================================================================================================================
-
+  // ============================================================ PRODUCT UPDATE ============================================================
   const handleProductUpdate = async (e, currentProduct) => {
     e.preventDefault();
 
     try {
-      const response = await axios.patch(
-        `http://localhost:8000/products/${currentProduct.id}`,
-        currentProduct
+      const response = await axios.put(
+        `${apiUrl2}/products/${currentProduct.id}/`,
+        currentProduct,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const updatedProducts = products.map((product) =>
         product.id === currentProduct.id ? currentProduct : product
@@ -450,18 +471,15 @@ export const ProductProvider = ({ children }) => {
       setProducts(updatedProducts);
 
       console.log("Updated Product:", response.data);
-      // Navigate to the admin page after a successful update
       navigate("/admin");
     } catch (error) {
       console.error("Error updating product:", error);
-      // Optionally, you could show an error message to the user here
     }
   };
 
-  // ===============================================================================================================================
+  // ============================================================ DELETE USER ============================================================
 
   const handleDeleteUser = (id) => {
-    // Show a SweetAlert confirmation popup
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this action!",
@@ -472,23 +490,19 @@ export const ProductProvider = ({ children }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Proceed with deletion if the user confirms
         axios
-          .delete(`http://localhost:8000/users/${id}`)
+          .delete(`${apiUrl2}/users/${id}`)
           .then((res) => {
             console.log("User deleted successfully", res);
             const deletedUserData = res.data;
 
-            // Update the users state by removing the deleted user
             const updatedUsers = users.filter(
               (item) => item.id !== deletedUserData.id
             );
             setUsers(updatedUsers);
 
-            // Show success message
             Swal.fire("Deleted!", "The user has been deleted.", "success");
 
-            // Navigate back to admin page
             navigate("/admin");
           })
           .catch((err) => {
@@ -499,9 +513,9 @@ export const ProductProvider = ({ children }) => {
     });
   };
 
-  // ===============================================================================================================================
+  // ============================================================ BLOCK USER ============================================================
 
-  const handleBlockUser = (userId) => {
+  const handleBlockUser = (userId, blocked) => {
     // Show a SweetAlert confirmation popup
     Swal.fire({
       title: "Are you sure?",
@@ -513,27 +527,25 @@ export const ProductProvider = ({ children }) => {
       confirmButtonText: `Yes, ${blocked ? "unblock" : "block"} it!`,
     }).then((result) => {
       if (result.isConfirmed) {
-        // Toggle the blocked state manually and get the updated value
-        const updatedBlocked = !blocked;
-
-        // Update the state with the new blocked value
-        setBlocked(updatedBlocked);
-
-        // Make sure to send the updatedBlocked value in the PATCH request
+        // Determine the action based on the current blocked status
+        const action = blocked ? "unblock" : "block";
+  
         axios
-          .patch(`http://localhost:8000/users/${userId}`, {
-            isblocked: updatedBlocked,
-          })
+          .post(`${apiUrl2}/user/block-unblock/${userId}/`, {
+            action: action, 
+          },
+          {
+            headers:{
+              Authorization :`Bearer ${token}`
+            }
+          }
+        )
           .then((res) => {
             console.log("User Block Status Updated", res.data);
-
-            // Store the updated blocked value in localStorage
-            localStorage.setItem("isBlocked", updatedBlocked);
-
             // Show a success message
             Swal.fire(
-              `${updatedBlocked ? "Blocked" : "Unblocked"}!`,
-              `The user has been ${updatedBlocked ? "blocked" : "unblocked"}.`,
+              `${action === "block" ? "Blocked" : "Unblocked"}!`,
+              `The user has been ${action === "block" ? "blocked" : "unblocked"}.`,
               "success"
             );
           })
@@ -543,6 +555,15 @@ export const ProductProvider = ({ children }) => {
           });
       }
     });
+  };
+  
+
+  // ============================================================ LOGOUT ============================================================
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setCart([]);
+    navigate("/");
   };
 
   // ===============================================================================================================================
@@ -559,12 +580,11 @@ export const ProductProvider = ({ children }) => {
         setIsLoggedIn,
         users,
         setUsers,
-        handleLogin,
         handleLogout,
         handleAddToCart,
         incrementQuantity,
         decrementQuantity,
-        removeItem,
+        handleDelete,
         count,
         setCount,
         cart,
@@ -575,6 +595,17 @@ export const ProductProvider = ({ children }) => {
         handleBlockUser,
         orderStatus,
         setOrderStatus,
+        totalPages,
+        setCurrentPage,
+        currentPage,
+        order,
+        loadingOrder,
+        fetchOrder,
+        currentUser,
+        setProducts,
+        totalOrders,
+        loadingTotalOrder,
+        totalCart
       }}
     >
       {children}

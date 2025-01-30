@@ -2,46 +2,127 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import Footer from "../../components/Footer/Footer";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../components/Context/Product";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const CheckOut = () => {
   const navigate = useNavigate();
-  const { cart } = useContext(ProductContext); // Access cart from context
+  const { cart,fetchOrder } = useContext(ProductContext); // Access cart from context
+  const [razorpayOrder, setRazorpayOrder] = useState(null);
 
-  // Validation schema with Yup
   const validationSchema = Yup.object().shape({
-    fullName: Yup.string().required("Full Name is required"),
-    email: Yup.string().email("Invalid email format").required("Email is required"),
     phone: Yup.string()
-      .matches(/^[0-9]{10}$/, "Phone number should be 10 digits")
-      .required("Phone number is required"),
-    streetAddress: Yup.string().required("Street Address is required"),
-    pincode: Yup.string().matches(/^[0-9]{6}$/, "Pincode should be 6 digits").required("Pincode is required"),
+      .matches(/^\d{10}$/, "Phone number must be 10 digits")
+      .required("Phone is required"),
+    street_address: Yup.string().required("Street address is required"),
+    pincode: Yup.string()
+      .matches(/^\d{6}$/, "Pincode must be 6 digits")
+      .required("Pincode is required"),
     city: Yup.string().required("City is required"),
     state: Yup.string().required("State is required"),
     country: Yup.string().required("Country is required"),
   });
 
-  // Initial form values
   const initialValues = {
-    fullName: "",
-    email: "",
     phone: "",
-    streetAddress: "",
+    street_address: "",
     pincode: "",
     city: "",
     state: "",
     country: "",
   };
 
-  // Submit handler to navigate to the payment page
-  const handleSubmit = (values, { setSubmitting }) => {
-    // Save form data to localStorage to pass it to the payment page
-    localStorage.setItem("checkoutDetails", JSON.stringify(values));
-    navigate("/payment"); // Navigate to payment page
-    setSubmitting(false);
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const token = localStorage.getItem("token");
+    console.log("Token:", token);
+
+    if (!token) {
+      alert("User not authenticated");
+      setSubmitting(false);
+      return;
+    }
+
+    console.log("Submitting form...");
+    // console.log("Data to API:", {
+    //   address: {
+    //     street_address: values.street_address,
+    //     pincode: values.pincode,
+    //     city: values.city,
+    //     state: values.state,
+    //     country: values.country,
+    //   },
+    //   cart_items: cart,
+    // });
+
+    try {
+      const response = await axios.post(
+        `${apiUrl}/checkout/`,
+        {
+          phone: values.phone,
+          street_address: values.street_address,
+          pincode: values.pincode,
+          city: values.city,
+          state: values.state,
+          country: values.country,
+          cart_items: cart,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("API Response:", response.data);
+      console.log("razorpay Response:", response.data.razorpay_order);
+      const data = response.data;
+
+      if (data.razorpay_order) {
+        setRazorpayOrder(data.razorpay_order);
+        openRazorpayPayment(data.razorpay_order);
+      } else {
+        alert("Failed to initiate payment. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      alert("Checkout failed. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  // Initialize Razorpay payment
+  const openRazorpayPayment = (razorpay_order) => {
+    const options = {
+      key: "rzp_test_KVYa3j27SRKqtq", // Your Razorpay test key
+      amount: razorpay_order.amount,
+      currency: razorpay_order.currency,
+      order_id: razorpay_order.id,
+      handler: function (response) {
+        // Handle payment response here
+        const paymentId = response.razorpay_payment_id;
+        console.log("Payment Successful!", paymentId);
+        fetchOrder()
+        navigate('/profile')
+      },
+      prefill: {
+        name: "Customer Name",
+        email: "customer@example.com",
+        contact: "1234567890",
+      },
+      theme: {
+        color: "#00faed",
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+  
+  
 
   return (
     <>
@@ -55,20 +136,22 @@ const CheckOut = () => {
             cart.map((item) => (
               <div key={item.id} className="flex items-center mb-4">
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.product_image.replace("https%3A/solestylebucket.s3.ap-south-1.amazonaws.com/", "")}
+                  alt={item.product_name}
                   className="h-20 w-20 object-cover rounded-lg shadow-sm mr-4"
                 />
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold">{item.name}</h3>
-                  <p className="text-gray-500">Price: ₹{item.price}</p>
+                  <h3 className="text-lg font-semibold">{item.product_name}</h3>
+                  <p className="text-gray-500">Price: ₹{item.product_price}</p>
                   <p className="text-gray-600">Quantity: {item.quantity}</p>
+                  <p className="text-gray-600">Size: {item.size}</p>
                 </div>
               </div>
             ))
           )}
           <h2 className="text-xl font-bold mt-4">
-            Total: ₹{cart.reduce((total, item) => total + item.price * item.quantity, 0)}
+            Total: ₹
+            {cart.reduce((total, item) => total + item.item_subtotal, 0)}
           </h2>
         </div>
 
@@ -78,53 +161,40 @@ const CheckOut = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values }) => (
             <Form className="w-full bg-white p-8 shadow-lg rounded-lg m-6">
               <h2 className="text-2xl font-bold mb-6">CheckOut Form</h2>
-
-              {/* Form fields */}
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Full Name</label>
-                <Field
-                  type="text"
-                  name="fullName"
-                  className="w-full p-2 border rounded"
-                  placeholder="Enter your full name"
-                />
-                <ErrorMessage name="fullName" component="div" className="text-red-500" />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Email</label>
-                <Field
-                  type="email"
-                  name="email"
-                  className="w-full p-2 border rounded"
-                  placeholder="Enter your email"
-                />
-                <ErrorMessage name="email" component="div" className="text-red-500" />
-              </div>
 
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Phone</label>
                 <Field
-                  type="tel"
+                  type="text"
                   name="phone"
                   className="w-full p-2 border rounded"
                   placeholder="Enter your phone number"
                 />
-                <ErrorMessage name="phone" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="phone"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
 
               <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Street Address</label>
+                <label className="block text-gray-700 mb-2">
+                  Street Address
+                </label>
                 <Field
                   type="text"
-                  name="streetAddress"
+                  name="street_address"
                   className="w-full p-2 border rounded"
                   placeholder="Enter your street address"
                 />
-                <ErrorMessage name="streetAddress" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="street_address"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
 
               <div className="mb-4">
@@ -135,7 +205,11 @@ const CheckOut = () => {
                   className="w-full p-2 border rounded"
                   placeholder="Enter your pincode"
                 />
-                <ErrorMessage name="pincode" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="pincode"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
 
               <div className="mb-4">
@@ -146,7 +220,11 @@ const CheckOut = () => {
                   className="w-full p-2 border rounded"
                   placeholder="Enter your city"
                 />
-                <ErrorMessage name="city" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="city"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
 
               <div className="mb-4">
@@ -157,7 +235,11 @@ const CheckOut = () => {
                   className="w-full p-2 border rounded"
                   placeholder="Enter your state"
                 />
-                <ErrorMessage name="state" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="state"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
 
               <div className="mb-4">
@@ -168,10 +250,18 @@ const CheckOut = () => {
                   className="w-full p-2 border rounded"
                   placeholder="Enter your country"
                 />
-                <ErrorMessage name="country" component="div" className="text-red-500" />
+                <ErrorMessage
+                  name="country"
+                  component="div"
+                  className="text-red-500"
+                />
               </div>
-
-              {/* Submit Button */}
+              <button
+                type="button"
+                onClick={() => console.log("Formik State:", values)}
+              >
+                Debug Values
+              </button>
               <button
                 type="submit"
                 className="bg-blue-500 text-white p-2 rounded"

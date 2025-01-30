@@ -14,6 +14,7 @@ const NavMobile = ({ open }) => {
   const { users, handleLogout } = useContext(ProductContext);
   const [currentUser, setCurrentUser] = useState(null);
   const id = localStorage.getItem("id");
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const user = users.find((item) => item.id === id);
@@ -29,7 +30,7 @@ const NavMobile = ({ open }) => {
   // };
   const logoutFunction = () => {
     axios
-      .patch(`http://localhost:8000/users/${currentUser.id}`, {
+      .patch(`${apiUrl}/users/${currentUser.id}`, {
         isLoggedIn: false,
       })
       .then(() => {

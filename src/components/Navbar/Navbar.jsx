@@ -22,6 +22,7 @@ const Navbar = () => {
   const [cartLength, setCartLength] = useState(0);
 
   const id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-          {id ? (
+          {token ? (
             <div className="flex flex-row-reverse gap-4 flex-wrap ">
               <LoginLayout open={open} openSet={setOpen} />
               <div className="flex flex-row-reverse gap-6 ">

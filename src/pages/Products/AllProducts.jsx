@@ -2,10 +2,14 @@ import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ProductContext } from "../../components/Context/Product";
 import Footer from "../../components/Footer/Footer";
+import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
+import axios from "axios";
 
 const AllProducts = () => {
   const navigate = useNavigate();
-  const { products } = useContext(ProductContext);
+  const { products, totalPages, setCurrentPage, currentPage } = useContext(
+    ProductContext
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   const [search, setSearch] = useState("");
@@ -27,20 +31,29 @@ const AllProducts = () => {
     loadData();
   }, []);
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+  // log
+
+
+  
+
+
   useEffect(() => {
     if (products.length > 0) {
       setCategorizedProduct(products);
       setSearchProducts(products);
       const FilteredMen = products.filter(
-        (product) => product.category === "Men"
+        (product) => product.category === "men"
       );
       setMen(FilteredMen);
       const FilteredWomen = products.filter(
-        (product) => product.category === "Women"
+        (product) => product.category === "women"
       );
       setWomen(FilteredWomen);
       const FilteredKids = products.filter(
-        (product) => product.category === "Kids"
+        (product) => product.category === "kids"
       );
       setKids(FilteredKids);
     }
@@ -61,7 +74,7 @@ const AllProducts = () => {
       setSearchProducts(categorizedProduct);
     }
   }, [search, categorizedProduct]);
-
+  
   if (isLoading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -89,7 +102,7 @@ const AllProducts = () => {
             placeholder="Search for products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border-2 border-gray-300 rounded-lg p-2 w-2/3 sm:w-1/3"
+            className="border-2 border-gray-300 rounded-lg p-2 w-2/3 sm:w-1/3 "
           />
         </div>
         <div className="sticky top-16 z-20 backdrop-blur border-none outline-none text-secondary">
@@ -97,7 +110,7 @@ const AllProducts = () => {
             <button
               className={`cursor-pointer ${
                 activeCategory === "All"
-                  ? "text-secondary font-bold text-lg tranform-all ease-in-out duration-500"
+                  ? "text-secondary font-bold text-lg transform-all ease-in-out duration-500"
                   : "text-primary"
               } px-4 py-2 rounded-lg`}
               onClick={() => handleCategory("All", products)}
@@ -107,7 +120,7 @@ const AllProducts = () => {
             <button
               className={`cursor-pointer ${
                 activeCategory === "Men"
-                  ? "text-secondary font-bold text-lg tranform-all ease-in-out duration-500"
+                  ? "text-secondary font-bold text-lg transform-all ease-in-out duration-500"
                   : "text-primary"
               } px-4 py-2 rounded-lg`}
               onClick={() => handleCategory("Men", men)}
@@ -152,6 +165,34 @@ const AllProducts = () => {
           )}
         </div>
       </div>
+      {/* <div className="flex flex-col justify-center items-center">
+        <div className="flex gap-4">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={currentPage === index + 1 ? "active" : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+        <div className="flex gap-3 justify-center items-center">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <MdOutlineNavigateBefore className="text-3xl" />
+          </button>
+          <p>{currentPage}</p>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            <MdOutlineNavigateNext className="text-3xl" />
+          </button>
+        </div>
+      </div> */}
       <Footer />
     </>
   );
@@ -159,6 +200,8 @@ const AllProducts = () => {
 
 const ProductCard = ({ product, navigate }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  
 
   return (
     <div className="relative group border-[2px] p-4 w-full text-left rounded-md">
@@ -170,15 +213,18 @@ const ProductCard = ({ product, navigate }) => {
         )}
 
         <Link to={`/product/${product.id}`}>
+        {product.image_url && (
           <img
-            src={product.image}
-            alt={product.name}
-            className={`w-full h-full object-cover cursor-pointer md:hover:scale-105 transition-all duration-500 ease-in-out transform ${
-              isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-            }`}
-            loading="lazy"
-            onLoad={() => setIsLoaded(true)}
-          />
+          src={product.image.replace("https%3A/solestylebucket.s3.ap-south-1.amazonaws.com/", "")}
+          alt={product.name}
+          className={`w-full h-full object-cover cursor-pointer md:hover:scale-105 transition-all duration-500 ease-in-out transform ${
+            isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+          }`}
+          loading="lazy"
+          onLoad={() => setIsLoaded(true)}
+        />
+        )}
+          
         </Link>
       </div>
       <h3 className="opacity-60 uppercase">{product.brand}</h3>
@@ -188,6 +234,7 @@ const ProductCard = ({ product, navigate }) => {
         <button
           className="bg-secondary/60 my-4 px-6 py-2 rounded-3xl md:hover:scale-105 md:hover:bg-primary/60 transition-all ease-in-out duration-500"
           onClick={() => navigate(`/product/${product.id}`)}
+          // onClick={() => handleClick(product.id)}
         >
           View Product
         </button>

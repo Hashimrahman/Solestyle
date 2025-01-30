@@ -1,29 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaUserCircle } from "react-icons/fa";
 import Orders from "../CheckOut/Orders";
+import { ProductContext } from "../../components/Context/Product";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const ProfilePage = () => {
+  const { order } = useContext(ProductContext);
   const [activeSection, setActiveSection] = useState("orders");
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+  console.log("order page", order);
+  
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/users/${userId}`
-        );
-        setUserData(response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+    const fetchUserDetails = async () => {
+      if (token) {
+        try {
+          const res = await axios.get(`${apiUrl}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log("user details", res.data);
+          setUserData(res.data);
+        } catch (err) {
+          console.error("Error fetching user details: ", err);
+        }
       }
     };
-
-    fetchUserData();
-  }, [userId]);
+    fetchUserDetails();
+  }, []);
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
@@ -36,18 +45,13 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen flex bg-gray-100 m-5 rounded-lg">
       {/* Sidebar */}
-      <div className="w-1/4 bg-white p-6 shadow-lg">
+      <div className="w-1/4 bg-white p-6 shadow-lg ">
         <div className="flex flex-col items-center">
           {/* Mock User Image */}
-          {/* <img
-            src="https://via.placeholder.com/150"
-            alt="User Avatar"
-            className="w-32 h-32 rounded-full mb-4"
-          /> */}
           <div className="w-32 h-32 flex justify-center items-center rounded-full mb-4 object-cover">
             <FaUserCircle className="w-full h-full" />
           </div>
-          <h2 className="text-lg font-semibold mb-6">{userData.fullName}</h2>
+          <h2 className="text-lg font-semibold mb-6">{userData.full_name}</h2>
 
           {/* Sidebar Links */}
           <div className="w-full">
@@ -92,9 +96,9 @@ const ProfilePage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="w-3/4 p-8">
+      <div className="w-3/4 p-8 ">
         {activeSection === "orders" && (
-          <div>
+          <div >
             <h2 className="text-2xl font-semibold mb-4">Your Orders</h2>
             <Orders />
           </div>
@@ -103,36 +107,17 @@ const ProfilePage = () => {
         {activeSection === "address" && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Address</h2>
-            {userData.address ? (
-              <div className="bg-white p-4 rounded-lg shadow">
-                <p>
-                  <strong>Full Name: </strong> {userData.address.fullName}
-                </p>
-                <p>
-                  <strong>Email: </strong> {userData.address.email}
-                </p>
-                <p>
-                  <strong>Phone: </strong> {userData.address.phone}
-                </p>
-                <p>
-                  <strong>Street Address: </strong>{" "}
-                  {userData.address.streetAddress}
-                </p>
-                <p>
-                  <strong>City: </strong> {userData.address.city}
-                </p>
-                <p>
-                  <strong>State: </strong> {userData.address.state}
-                </p>
-                <p>
-                  <strong>Country: </strong> {userData.address.country}
-                </p>
-                <p>
-                  <strong>Pincode: </strong> {userData.address.pincode}
-                </p>
-              </div>
-            ) : (
-              <p>No address found.</p>
+            {order.map((order, index,arr) =>
+              order.address && (
+                <div key={index} className="border shadow-sm m-4 rounded-md p-4">
+                  <h1>Address {arr.length - index +1}</h1>
+                  <p>{order.address.street_address}</p>
+                  <p>{order.address.phone}</p>
+                  <p>{order.address.city}</p>
+                  <p>{order.address.pincode}</p>
+
+                </div>
+              )
             )}
           </div>
         )}
@@ -142,10 +127,13 @@ const ProfilePage = () => {
             <h2 className="text-2xl font-semibold mb-4">Profile Details</h2>
             <div className="bg-white p-4 rounded-lg shadow">
               <p>
-                <strong>Full Name: </strong> {userData.fullName}
+                <strong>Full Name: </strong> {userData.full_name}
               </p>
               <p>
                 <strong>Email: </strong> {userData.email}
+              </p>
+              <p>
+                <strong>Username: </strong> {userData.username}
               </p>
               <p>
                 <strong>Account Created: </strong>{" "}

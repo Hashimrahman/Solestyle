@@ -1,43 +1,52 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+// import axios from "axios";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../components/Context/Product";
+import { CiBookmarkCheck, CiBookmarkRemove } from "react-icons/ci";
+// const apiUrl = import.meta.env.VITE_API_URL;
 
 const Orders = () => {
-  // const { users } = useContext(ProductContext); // Assuming users context has the order data
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { order, loadingOrder } = useContext(ProductContext);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("id");
+  // const [currentUser, setCurrentUser] = useState(null);
+  // const token = localStorage.getItem("token")
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/users/${userId}`);
-        const userData = response.data;
 
-        // Check if the user has any orders
-        if (userData.orders && userData.orders.length > 0) {
-          setOrders(userData.orders);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserDetails = async () => {
+  //     if (token) {
+  //       try {
+  //         const res = await axios.get("http://127.0.0.1:8000/user-details/", {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         });
+  //         console.log("details",res);
+  //         setCurrentUser(res.data)
+          
+  //       } catch (err) {
+  //         console.error("Error fetching user details: ",err);
+  //       }
+  //     }
+  //   };
+  //   fetchUserDetails()
+  // },[token]);
 
-    fetchOrders();
-  }, [userId]);
 
-  if (loading) {
+  const handleSubmit = ()=>{
+    console.log("Initiating Payment");
+    
+  }
+  
+
+  if (loadingOrder) {
     return <div>Loading orders...</div>;
   }
 
-  if (orders.length === 0) {
+  if (order.length === 0) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-bold mb-4">No Orders Found</h2>
+        <h2 className="text-2xl font-bold mb-4">No OrdersFound</h2>
         <p className="text-gray-500">You have not placed any orders yet.</p>
       </div>
     );
@@ -47,67 +56,64 @@ const Orders = () => {
     <div className="min-h-screen bg-gray-100 py-10">
       <h2 className="text-3xl font-bold text-center mb-8">Your Orders</h2>
       <div className="max-w-4xl mx-auto">
-        {orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((order) => {
-          // Calculate the total price for the current order
-          const orderTotal = order.products.reduce(
-            (total, product) => total + product.price * product.quantity,
-            0
-          );
-
-          return (
+        {/* {order.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((order) => { */}
+        {order
+          ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .map((order) => (
             <div
-              key={order.orderId}
+              key={order.order_id}
               className="bg-white p-6 rounded-lg shadow-lg mb-6"
             >
               <h3 className="text-xl font-semibold mb-2">
-                Order ID: {order.orderId}
+                Order ID: {order.order_id}
               </h3>
               <p className="text-gray-500 mb-2">
-                Order Date: {new Date(order.orderDate).toLocaleDateString()}
+                Order Date: {new Date(order.created_at).toLocaleDateString()}
               </p>
               <p className="text-gray-500 mb-4">Status: {order.status}</p>
               <div>
                 <h4 className="text-lg font-semibold mb-2">Products:</h4>
                 <ul>
-                  {order.products.map((product) => (
-                    <li key={product.id} className="mb-2">
+                  {order.items.map((product, index) => (
+                    <li key={index} className="mb-2 bg-gray-100 p-4 rounded-md">
                       <div className="flex items-center">
                         <img
-                          src={product.image}
+                          src={product.product_image.replace("https%3A/solestylebucket.s3.ap-south-1.amazonaws.com/", "")}
                           alt={product.name}
-                          className="w-16 h-16 object-cover rounded mr-4"
+                          className={`w-16 h-16 object-cover rounded mr-4 ${product.is_cancelled ? "opacity-50" : ""}`}
                         />
                         <div>
-                          <p className="font-semibold">{product.name}</p>
-                          <p>Price: ₹{product.price}</p>
-                          <p>Quantity: {product.quantity}</p>
+                          <p className="font-semibold">
+                            {product.product_name}
+                          </p>
+                          <p className={`${product.is_cancelled ? "line-through" : ""}`}>Price: ₹{product.product_price}</p>
+                          <p className={`${product.is_cancelled ? "line-through" : ""}`}>Quantity: {product.quantity}</p>
                         </div>
                       </div>
+                      <button className="mt-4 p-2 bg-gray-200 rounded-md shadow-md">Cancel Order</button>
                     </li>
                   ))}
                 </ul>
-                {/* Display the total price for the current order */}
                 <h1 className="font-semibold mt-4">
-                  Total Price: ₹{orderTotal}
+                  Total Price: ₹{order.total_price}
                 </h1>
-                
-                {/* Display the status with color coding */}
-                {/* <h1 className="">
-                  Status:{" "}
-                  {order.status === "Pending" && (
-                    <span className="text-red-600">Pending</span>
-                  )}
-                  {order.status === "Shipped" && (
-                    <span className="text-yellow-600">Shipped</span>
-                  )}
-                  {order.status === "Delivered" && (
-                    <span className="text-green-600">Delivered</span>
-                  )}
-                </h1> */}
+                {order.razorpay_order.status == "paid" ? (
+                  <div className="flex flex-row-reverse gap-2 items-center text-green-500 font-bold">
+                    <h1>Payment Successful </h1>
+                    <CiBookmarkCheck className="text-xl font-bold" />
+                  </div>
+                ) : (
+                  <div className="text-red-500 font-bold flex flex-col items-end">
+                    <div className="flex flex-row-reverse gap-2 items-center">
+                      <h1>Payment Pending </h1>
+                      <CiBookmarkRemove className="text-xl font-bold" />
+                    </div>
+                    <button className="bg-blue-500 text-white px-9 py-2 rounded-sm mt-3" onClick={handleSubmit}>Pay Now</button>
+                  </div>
+                )}
               </div>
             </div>
-          );
-        })}
+          ))}
       </div>
       <div className="w-full flex justify-center">
         <button
@@ -122,55 +128,92 @@ const Orders = () => {
 };
 
 export default Orders;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import axios from "axios";
 // import { useContext, useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { ProductContext } from "../../components/Context/Product";
 
 // const Orders = () => {
-//   const { users } = useContext(ProductContext);
+//   const { order } = useContext(ProductContext); // Assuming users context has the order data
 //   const [orders, setOrders] = useState([]);
 //   const [loading, setLoading] = useState(true);
 //   const navigate = useNavigate();
 //   const userId = localStorage.getItem("id");
 
-//   useEffect(() => {
-//     const fetchOrders = async () => {
-//       try {
-//         const response = await axios.get(`http://localhost:8000/users/${userId}`);
-//         const userData = response.data;
+//   // useEffect(() => {
+//   //   const fetchOrders = async () => {
+//   //     try {
+//   //       const response = await axios.get(`http://localhost:8000/users/${userId}`);
+//   //       const userData = response.data;
 
-//         if (userData.orders && userData.orders.length > 0) {
-//           setOrders(userData.orders);
-//         }
-//         setLoading(false);
-//       } catch (error) {
-//         console.error("Error fetching orders:", error);
-//         setLoading(false);
-//       }
-//     };
+//   //       // Check if the user has any orders
+//   //       if (userData.orders && userData.orders.length > 0) {
+//   //         setOrders(userData.orders);
+//   //       }
+//   //       setLoading(false);
+//   //     } catch (error) {
+//   //       console.error("Error fetching orders:", error);
+//   //       setLoading(false);
+//   //     }
+//   //   };
 
-//     fetchOrders();
-//   }, [userId]);
+//   //   fetchOrders();
+//   // }, [userId]);
 
-//   if (loading) {
-//     return <div>Loading orders...</div>;
-//   }
+//   // if (loading) {
+//   //   return <div>Loading orders...</div>;
+//   // }
 
-//   if (orders.length === 0) {
+//   if (order.length === 0) {
 //     return (
 //       <div className="min-h-screen flex flex-col items-center justify-center">
-//         <h2 className="text-2xl font-bold mb-4">No Orders Found</h2>
+//         <h2 className="text-2xl font-bold mb-4">No OrdersFound</h2>
 //         <p className="text-gray-500">You have not placed any orders yet.</p>
 //       </div>
 //     );
 //   }
 
 //   return (
-//     <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-20">
-//       <h2 className="text-4xl font-bold text-center mb-8">Your Orders</h2>
-//       <div className="max-w-6xl mx-auto space-y-8">
-//         {orders.map((order) => {
+//     <div className="min-h-screen bg-gray-100 py-10">
+//       <h2 className="text-3xl font-bold text-center mb-8">Your Orders</h2>
+//       <div className="max-w-4xl mx-auto">
+//         {order.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)).map((order) => {
+//           // Calculate the total price for the current order
 //           const orderTotal = order.products.reduce(
 //             (total, product) => total + product.price * product.quantity,
 //             0
@@ -179,66 +222,61 @@ export default Orders;
 //           return (
 //             <div
 //               key={order.orderId}
-//               className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+//               className="bg-white p-6 rounded-lg shadow-lg mb-6"
 //             >
-//               <div className="flex justify-between items-center mb-4">
-//                 <div>
-//                   <h3 className="text-2xl font-semibold">
-//                     Order ID: {order.orderId}
-//                   </h3>
-//                   <p className="text-gray-500">
-//                     Order Date: {new Date(order.orderDate).toLocaleDateString()}
-//                   </p>
-//                 </div>
-//                 <p
-//                   className={`font-bold text-lg ${
-//                     order.status === "Pending"
-//                       ? "text-red-500"
-//                       : order.status === "Shipped"
-//                       ? "text-yellow-500"
-//                       : "text-green-500"
-//                   }`}
-//                 >
-//                   {order.status}
-//                 </p>
-//               </div>
-//               <div className="border-t pt-4">
-//                 <h4 className="text-xl font-semibold mb-4">Products:</h4>
-//                 <div className="space-y-4">
+//               <h3 className="text-xl font-semibold mb-2">
+//                 Order ID: {order.orderId}
+//               </h3>
+//               <p className="text-gray-500 mb-2">
+//                 Order Date: {new Date(order.orderDate).toLocaleDateString()}
+//               </p>
+//               <p className="text-gray-500 mb-4">Status: {order.status}</p>
+//               <div>
+//                 <h4 className="text-lg font-semibold mb-2">Products:</h4>
+//                 <ul>
 //                   {order.products.map((product) => (
-//                     <div
-//                       key={product.id}
-//                       className="flex items-center space-x-6 border p-4 rounded-lg"
-//                     >
-//                       <img
-//                         src={product.image}
-//                         alt={product.name}
-//                         className="w-20 h-20 object-cover rounded-lg"
-//                       />
-//                       <div>
-//                         <h5 className="font-semibold text-lg">{product.name}</h5>
-//                         <p className="text-gray-500">Price: ₹{product.price}</p>
-//                         <p className="text-gray-500">
-//                           Quantity: {product.quantity}
-//                         </p>
-//                         <p className="text-gray-600 font-semibold">
-//                           Sub Total: ₹{product.price * product.quantity}
-//                         </p>
+//                     <li key={product.id} className="mb-2">
+//                       <div className="flex items-center">
+//                         <img
+//                           src={product.image}
+//                           alt={product.name}
+//                           className="w-16 h-16 object-cover rounded mr-4"
+//                         />
+//                         <div>
+//                           <p className="font-semibold">{product.name}</p>
+//                           <p>Price: ₹{product.price}</p>
+//                           <p>Quantity: {product.quantity}</p>
+//                         </div>
 //                       </div>
-//                     </div>
+//                     </li>
 //                   ))}
-//                 </div>
-//                 <h4 className="text-xl font-semibold mt-6">
+//                 </ul>
+//                 {/* Display the total price for the current order */}
+//                 <h1 className="font-semibold mt-4">
 //                   Total Price: ₹{orderTotal}
-//                 </h4>
+//                 </h1>
+
+//                 {/* Display the status with color coding */}
+//                 {/* <h1 className="">
+//                   Status:{" "}
+//                   {order.status === "Pending" && (
+//                     <span className="text-red-600">Pending</span>
+//                   )}
+//                   {order.status === "Shipped" && (
+//                     <span className="text-yellow-600">Shipped</span>
+//                   )}
+//                   {order.status === "Delivered" && (
+//                     <span className="text-green-600">Delivered</span>
+//                   )}
+//                 </h1> */}
 //               </div>
 //             </div>
 //           );
 //         })}
 //       </div>
-//       <div className="w-full flex justify-center mt-10">
+//       <div className="w-full flex justify-center">
 //         <button
-//           className="bg-blue-500 text-white px-12 py-3 rounded-full hover:bg-blue-600 transition-colors duration-300"
+//           className="bg-blue-400 px-16 py-4 rounded-3xl text-lg"
 //           onClick={() => navigate("/")}
 //         >
 //           Go to Home

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -8,7 +9,7 @@ const Category = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/categories")
+      .get(`${apiUrl}/categories`)
       .then((res) => {
         // Check the structure of your response
         console.log("API Response:", res.data);

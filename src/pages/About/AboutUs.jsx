@@ -15,7 +15,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Our Story Section */}
       <section className="py-20">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Our Story</h2>
@@ -34,12 +33,10 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Our Values Section */}
       <section className="bg-white py-20">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-center mb-8">Our Values</h2>
           <div className="flex flex-wrap justify-center gap-8">
-            {/* Value 1 */}
             <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full md:w-1/3 text-center">
               <h3 className="text-xl font-semibold mb-4">Quality</h3>
               <p>
@@ -48,7 +45,6 @@ const AboutUs = () => {
               </p>
             </div>
 
-            {/* Value 2 */}
             <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full md:w-1/3 text-center">
               <h3 className="text-xl font-semibold mb-4">Style</h3>
               <p>
@@ -57,7 +53,6 @@ const AboutUs = () => {
               </p>
             </div>
 
-            {/* Value 3 */}
             <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full md:w-1/3 text-center">
               <h3 className="text-xl font-semibold mb-4">Customer Focus</h3>
               <p>
@@ -70,12 +65,10 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Meet The Team Section */}
       <section className="py-20">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-8">Meet The Team</h2>
           <div className="flex flex-wrap justify-center gap-8">
-            {/* Team Member 1 */}
             <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
               <img
                 src="https://via.placeholder.com/150"
@@ -86,7 +79,6 @@ const AboutUs = () => {
               <p className="text-gray-600">Co-Founder & CEO</p>
             </div>
 
-            {/* Team Member 2 */}
             <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
               <img
                 src="https://via.placeholder.com/150"
@@ -97,7 +89,6 @@ const AboutUs = () => {
               <p className="text-gray-600">Co-Founder & CMO</p>
             </div>
 
-            {/* Team Member 3 */}
             <div className="bg-white p-6 rounded-lg shadow-md w-full md:w-1/3">
               <img
                 src="https://via.placeholder.com/150"
@@ -111,7 +102,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white py-6">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 SoleStyle. All rights reserved.</p>

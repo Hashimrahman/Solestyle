@@ -1,8 +1,6 @@
 import "./App.css";
-// import Logo from "./assets/SoleStyle.png";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-// import Navbar from "./components/Navbar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import AllProducts from "./pages/Products/AllProducts";
@@ -20,25 +18,33 @@ import EditProductForm from "./pages/Admin/ProductEditing";
 import AboutUs from "./pages/About/AboutUs";
 import Featured from "./pages/Products/Featured";
 import ContactUs from "./pages/Contact/ContactUs";
+import Hero from "./components/Hero";
+import Form from "./Form";
+// import CameraCapture from "./components/camera/CameraCapture";
 
 function App() {
+
   return (
     <>
       <ProductProvider>
         <Routes>
           <Route path="/" element={<Navbar />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<DetailedView />} />
+            <Route index element={<Home />} />
+            <Route path="product/:id" element={<DetailedView />} />
             <Route path="shop" element={<AllProducts />} />
             <Route path="cart" element={<Cart />} />
             <Route path="about-us" element={<AboutUs />} />
             <Route path="trending" element={<Featured />} />
             <Route path="contact" element={<ContactUs />} />
-            <Route path="/submit" element={<CheckOut />} />
-            <Route path="/payment" element={<Payment />} />
+            <Route path="submit" element={<CheckOut />} />
+            <Route path="payment" element={<Payment />} />
+            <Route path = "form" element = {<Form />} />
           </Route>
           <Route path="/register" element={<Register />} />
+          {/* <Route path="/capture" element={<CameraCapture />} /> */}
           <Route path="/login" element={<Login />} />
+          <Route path="/slider" element={<Hero />} />
+          
 
           <Route path="*" element={<h1>Not Found</h1>} />
           

@@ -1,18 +1,29 @@
-import {useContext } from "react";
+import {useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import { ProductContext } from "../../components/Context/Product";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { cart, incrementQuantity, decrementQuantity, removeItem } = useContext(
+  const {cart, incrementQuantity, decrementQuantity, handleDelete } = useContext(
     ProductContext
   );
+  // const token = localStorage.getItem("token")
+  // const [cart, setCart] = useState([])
 
   const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + item.item_subtotal,
     0
   );
+
+  // const handleClick = (id) =>{
+  //   console.log(typeof id);
+  //   console.log(token);
+    
+  // }
+
 
   return (
     <>
@@ -32,15 +43,18 @@ const Cart = () => {
                 className="flex items-center justify-between border-b py-6"
               >
                 <img
-                  src={item.image}
+                  src={item.product_image.replace("https%3A/solestylebucket.s3.ap-south-1.amazonaws.com/", "")}
                   alt={item.name}
                   className="h-28 w-28 object-cover rounded-lg shadow-sm"
                 />
                 <div className="flex-1 ml-4">
-                  <h2 className="text-xl font-semibold">{item.name}</h2>
-                  <p className="text-gray-500 mt-1">{item.price} ₹</p>
+                  <h2 className="text-xl font-semibold">{item.product_name}</h2>
+                  <p className="text-gray-500 mt-1">{item.product_price} ₹</p>
                   <p className="text-gray-600 mt-1">
-                    Subtotal: ₹{item.price * item.quantity}
+                    Subtotal: ₹{item.item_subtotal}
+                  </p>
+                  <p className="text-gray-600 mt-1">
+                    size: {item.size}
                   </p>
                 </div>
                 <div className="flex flex-col items-center">
@@ -60,7 +74,7 @@ const Cart = () => {
                     </button>
                   </div>
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => handleDelete(item.id)}
                     className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
                   >
                     Remove

@@ -34,43 +34,23 @@
           "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
           "stock": 20,
           "trending": true,
-          "quantity": 2
-        },
-        {
-          "id": "9",
-          "name": "Jordan 1 Retro High",
-          "category": "Men",
-          "price": 14110,
-          "description": "Iconic basketball shoes featuring premium leather and Air cushioning for comfort and style.",
-          "sizes": [
-            8,
-            9,
-            10,
-            11,
-            12
-          ],
-          "brand": "Jordan",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/5/o/-original-imagzjw3cyd9gf9f.jpeg?q=70",
-          "stock": 12,
-          "trending": true,
           "quantity": 1
         },
         {
-          "id": "12",
-          "name": "Vans Sk8-Hi",
+          "id": "3",
+          "name": "Classic Slip-On",
           "category": "Men",
-          "price": 5810,
-          "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
+          "price": 4980,
+          "description": "Classic Vans slip-on sneakers, perfect for casual wear with a timeless look and comfortable fit.",
           "sizes": [
             8,
             9,
             10,
-            11,
-            12
+            11
           ],
           "brand": "Vans",
-          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
-          "stock": 35,
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
+          "stock": 40,
           "trending": false,
           "quantity": 1
         }
@@ -158,8 +138,92 @@
           ],
           "orderDate": "2024-10-03T16:14:49.180Z",
           "status": "Shipping"
+        },
+        {
+          "orderId": "2024-11-13T10:52:31.392Z",
+          "products": [
+            {
+              "id": "5",
+              "name": "Kid's Flex Runner",
+              "category": "Kids",
+              "price": 4150,
+              "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+              "sizes": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "brand": "Nike",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+              "stock": 20,
+              "trending": true,
+              "quantity": 3
+            },
+            {
+              "id": "9",
+              "name": "Jordan 1 Retro High",
+              "category": "Men",
+              "price": 14110,
+              "description": "Iconic basketball shoes featuring premium leather and Air cushioning for comfort and style.",
+              "sizes": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "brand": "Jordan",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/5/5/o/-original-imagzjw3cyd9gf9f.jpeg?q=70",
+              "stock": 12,
+              "trending": true,
+              "quantity": 1
+            },
+            {
+              "id": "12",
+              "name": "Vans Sk8-Hi",
+              "category": "Men",
+              "price": 5810,
+              "description": "High-top skate shoes offering superior ankle support with durable canvas and suede construction.",
+              "sizes": [
+                8,
+                9,
+                10,
+                11,
+                12
+              ],
+              "brand": "Vans",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/w/t/9/-original-imagtt4fbvzbg4tg.jpeg?q=70",
+              "stock": 35,
+              "trending": false,
+              "quantity": 1
+            },
+            {
+              "id": "19",
+              "name": "Adidas Swift Run",
+              "category": "Women",
+              "price": 6640,
+              "description": "Casual running shoes with a lightweight design, perfect for daily wear and workouts.",
+              "sizes": [
+                6,
+                7,
+                8,
+                9,
+                10
+              ],
+              "brand": "Adidas",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/6/f/1/9-ig4704-9-adidas-cblack-cblack-gum3-original-imagvcqxa5gcgdkn.jpeg?q=70",
+              "stock": 20,
+              "trending": true,
+              "quantity": 1
+            }
+          ],
+          "orderDate": "2024-11-13T10:52:31.392Z",
+          "status": "Paid"
         }
-      ]
+      ],
+      "isblocked": false
     },
     {
       "id": "e8106fb8-c2de-4306-ae0a-1390d1cc0abd",
@@ -168,7 +232,27 @@
       "password": "121212",
       "confirmPassword": "121212",
       "isLoggedIn": true,
-      "cart": [],
+      "cart": [
+        {
+          "id": "5",
+          "name": "Kid's Flex Runner",
+          "category": "Kids",
+          "price": 4150,
+          "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+          "sizes": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "brand": "Nike",
+          "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+          "stock": 20,
+          "trending": true,
+          "quantity": 3
+        }
+      ],
       "orders": [
         {
           "orderId": "2024-10-11T11:58:53.097Z",
@@ -592,6 +676,31 @@
           ],
           "orderDate": "2024-10-18T09:22:23.873Z",
           "status": "Paid"
+        },
+        {
+          "orderId": "2024-11-19T06:46:38.677Z",
+          "products": [
+            {
+              "id": "2",
+              "name": "UltraBoost 22",
+              "category": "Women",
+              "price": "14998",
+              "description": "High-performance running shoes with Boost technology for energy return and a sleek design for everyday wear.",
+              "sizes": [
+                6,
+                7,
+                8,
+                9
+              ],
+              "brand": "Adidas",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
+              "stock": "150",
+              "trending": true,
+              "quantity": 1
+            }
+          ],
+          "orderDate": "2024-11-19T06:46:38.677Z",
+          "status": "Paid"
         }
       ],
       "address": {
@@ -611,6 +720,82 @@
       "email": "q@gmail.com",
       "password": "121212",
       "confirmPassword": "121212",
+      "isLoggedIn": false
+    },
+    {
+      "id": "9a75b8df-0972-42c4-8821-a1759c25b886",
+      "fullName": "Demo",
+      "email": "demo@gmail.com",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "isLoggedIn": true,
+      "cart": [],
+      "orders": [
+        {
+          "orderId": "2024-10-26T09:22:17.860Z",
+          "products": [
+            {
+              "id": "5",
+              "name": "Kid's Flex Runner",
+              "category": "Kids",
+              "price": 4150,
+              "description": "Comfortable and flexible running shoes designed for kids on the move, with easy slip-on style.",
+              "sizes": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "brand": "Nike",
+              "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shopsy-kids-shoe/y/c/e/5-sh-tarzan-11-kids-asian-original-imahfzwurmyg8g8e.jpeg?q=70",
+              "stock": 20,
+              "trending": true,
+              "quantity": 1
+            }
+          ],
+          "orderDate": "2024-10-26T09:22:17.861Z",
+          "status": "Paid"
+        }
+      ]
+    },
+    {
+      "id": "6f23aad9-611d-418a-9a7a-3ede651ebc70",
+      "fullName": "temp",
+      "email": "temp12@gmail.com",
+      "password": "111111",
+      "confirmPassword": "111111",
+      "isLoggedIn": true
+    },
+    {
+      "id": "aa8be137-fa3c-4640-aacb-746e46c20b40",
+      "fullName": "vgckhvjb",
+      "email": "yvgkhj@gmail.com",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "isLoggedIn": false
+    },
+    {
+      "id": "eef32d0f-21d8-48f7-ba3f-961b62c11cf1",
+      "userName": " hjhkgjmbn",
+      "firstName": "ddxfjcgkhvjb",
+      "lastName": "gchkvgjbkn",
+      "email": "fxgnc@gmail.com",
+      "phone": "1234567891",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "isLoggedIn": false
+    },
+    {
+      "id": "af5fe2a9-5d1d-44d3-b62b-c78acdfac45d",
+      "username": "khcgjhmnbjk",
+      "first_name": "truyfkghlj",
+      "last_name": "yudtfiukgtyhlj",
+      "email": "xrdtyfg@gmail.com",
+      "phone": "",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "mobile_number": "1234567812",
       "isLoggedIn": false
     }
   ],
@@ -676,7 +861,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/s/0/4/-original-imah4aenzfnkq2bn.jpeg?q=70",
       "stock": "150",
       "trending": true,
-      "quantity": 1
+      "quantity": 2
     },
     {
       "id": "3",
@@ -694,7 +879,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/shoe/n/j/x/10-c2pilotblack165beige-10-hotspot-multicolor-original-imahfufhsfgzyz6m.jpeg?q=70",
       "stock": 40,
       "trending": false,
-      "quantity": 1
+      "quantity": 2
     },
     {
       "id": "4",
@@ -789,7 +974,7 @@
       "image": "https://rukminim2.flixcart.com/image/612/612/xif0q/kids-shoe/m/t/5/7c-unisex-kids-knitted-led-light-shoes-blink-2-for-1-4-yrs-boys-original-imahf7x6ytzsgy3v.jpeg?q=70",
       "stock": 25,
       "trending": false,
-      "quantity": 1
+      "quantity": null
     },
     {
       "id": "9",
