@@ -47,6 +47,7 @@ export const ProductProvider = ({ children }) => {
         // const res = await axios.get(`${apiUrl}/products`);
         const res = await axios.get(`${apiUrl2}/products/`);
         console.log("API Response product:", res.data);
+        console.log(import.meta.env.VITE_API_URL);
         setProducts(res.data);
         setProductCount(products.length);
       } catch (err) {
