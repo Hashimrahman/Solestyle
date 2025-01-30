@@ -52,6 +52,7 @@ export const ProductProvider = ({ children }) => {
         setProductCount(products.length);
       } catch (err) {
         console.error("API Error product:", err);
+        console.log("id",import.meta.env.VITE_API_URL);
       }
     };
 
